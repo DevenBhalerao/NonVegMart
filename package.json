@@ -1,0 +1,25 @@
+{
+	"name": "nonvegmart",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node server/index.js",
+		"backend": "nodemon backend/app.js",
+		"frontend": "npm run start --prefix frontend",
+		"dev": "concurrently \"npm run backend\" \"npm run start --prefix frontend\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/DevenBhalerao/NonVegMart.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/DevenBhalerao/NonVegMart/issues"
+	},
+	"homepage": "https://github.com/DevenBhalerao/NonVegMart#readme",
+	"dependencies": {
+		"concurrently": "^5.2.0"
+	}
+}

@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+const path = require('path');
+
 const mongoose = require('./database/mongoose');
 
 app.use(express.json());
@@ -25,32 +27,37 @@ app.use('/api/product', require('./api/product'));
 app.use('/api/product-category', require('./api/product-category'));
 app.use('/api/user-group', require('./api/user-group'));
 
+// index.html for all page routes
+app.get('/start', (req, res) => {
+	res.sendFile(path.join(__dirname, '..', 'frontend', 'src', 'index.js'));
+});
+
 //login
 
 app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
+app.get('/backendlogin', (req, res) => {
 	res.render('index.ejs', {
 		name: 'xyz',
 	});
 });
-app.get('/login', (req, res) => {
+app.get('/backendlogin/login', (req, res) => {
 	res.render('login.ejs');
 });
 
-app.post('/login');
+app.post('/backendlogin/login');
 
-app.get('/register', (req, res) => {
+app.get('/backendlogin/register', (req, res) => {
 	res.render('register.ejs');
 });
 
-app.post('/register', async (req, res) => {
+app.post('/backendlogin/register', async (req, res) => {
 	try {
 		const hashPassword = await bcrypt.hash(req.body.password, 10);
-		res.redirect('/login');
+		res.redirect('/backendlogin/login');
 	} catch {
-		res.redirect('/register');
+		res.redirect('/backendlogin/register');
 	}
 });
 

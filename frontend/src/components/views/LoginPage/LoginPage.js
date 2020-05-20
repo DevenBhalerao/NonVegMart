@@ -78,9 +78,9 @@ class Login extends Component {
 			.then((response) => {
 				console.log(response);
 
-				this.setState({ loggedIn: true });
+				//this.setState({ loggedIn: true });
 
-				localStorage.setItem('token', response.data.auth.access_token);
+				//localStorage.setItem('token', response.data.auth.access_token);
 			});
 	}
 }

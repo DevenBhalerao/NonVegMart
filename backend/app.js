@@ -6,6 +6,8 @@ const path = require('path');
 
 const mongoose = require('./database/mongoose');
 
+app.use('/uploads', express.static('uploads'));
+
 app.use(express.json());
 
 app.use(function (req, res, next) {
@@ -22,9 +24,11 @@ app.use(function (req, res, next) {
 	next();
 });
 
+app.use(express.static('uploads'));
+
 app.use('/api/users', require('./api/users'));
-app.use('/api/product', require('./api/product'));
-app.use('/api/product-category', require('./api/product-category'));
+app.use('/api/product', require('./api/product/product'));
+app.use('/api/product-category', require('./api/product/product-category'));
 app.use('/api/user-group', require('./api/user-group'));
 
 // index.html for all page routes

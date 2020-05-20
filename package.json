@@ -20,6 +20,8 @@
 	},
 	"homepage": "https://github.com/DevenBhalerao/NonVegMart#readme",
 	"dependencies": {
-		"concurrently": "^5.2.0"
+		"antd": "^4.2.4",
+		"concurrently": "^5.2.0",
+		"react-dropzone": "^11.0.1"
 	}
 }

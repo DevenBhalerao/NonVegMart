@@ -33,14 +33,15 @@ function UploadProductPage(props) {
 		}
 
 		const variables = {
-			productName: productName,
+			product_category_id: '5ebab8b9608b791ec4d01df7',
+			name: productName,
 			description: DescriptionValue,
-			price: PriceValue,
+			cost: PriceValue,
 			images: Images,
 		};
 
-		Axios.post('/api/product/uploadProduct', variables).then((response) => {
-			if (response.data.success) {
+		Axios.post('/api/product/', variables).then((response) => {
+			if (response) {
 				alert('Product Successfully Uploaded');
 				props.history.push('/');
 			} else {

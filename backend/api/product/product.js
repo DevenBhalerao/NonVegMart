@@ -47,6 +47,7 @@ router.post('/', (req, res) => {
 		name: req.body.name,
 		description: req.body.description,
 		cost: req.body.cost,
+		images: req.body.images,
 	})
 		.save()
 		.then((product) => res.send(product))

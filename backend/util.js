@@ -8,6 +8,8 @@ const getToken = (user) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isSeller:user.isSeller,
+      isDeliveryPerson:user.isDeliveryPerson,
     },
     config.JWT_SECRET,
     {
@@ -41,4 +43,18 @@ const isAdmin = (req, res, next) => {
   return res.status(401).send({ msg: 'Admin Token is not valid.' });
 };
 
-export { getToken, isAuth, isAdmin };
+const isSeller = (req,res,next)=>{
+  if(req.user && req.user.isSeller){
+    return next();
+  }
+  return res.status(401).send({msg: 'Seller token not valid'});
+}
+
+const isDeliveryPerson = (req,res,next) =>{
+  if(req.user && req.user.isDeliveryPerson){
+    return next();
+  }
+  return res.status(401).send({msg: 'Delivery Person token not valid'});
+}
+
+export { getToken, isAuth, isAdmin, isSeller,isDeliveryPerson };

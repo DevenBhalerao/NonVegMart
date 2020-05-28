@@ -14,6 +14,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import UploadCategoryScreen from './screens/UploadCategoryScreen';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -47,6 +48,7 @@ function App() {
                   <li>
                     <Link to="/orders">Orders</Link>
                     <Link to="/products">Products</Link>
+                    <Link to="/categories">Categories</Link>
                   </li>
                 </ul>
               </div>
@@ -74,6 +76,7 @@ function App() {
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/order/:id" component={OrderScreen} />
             <Route path="/products" component={UploadProductsScreen} />
+            <Route path="/categories" component={UploadCategoryScreen} />
             <Route path="/shipping" component={ShippingScreen} />
             <Route path="/payment" component={PaymentScreen} />
             <Route path="/placeorder" component={PlaceOrderScreen} />

@@ -4,7 +4,6 @@ import { isAuth, isAdmin } from '../util';
 
 const router = express.Router();
 
-
 router.get('/:id', async (req, res) => {
   const category = await Category.findOne({ _id: req.params.id });
   if (category) {
@@ -14,13 +13,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 router.get('/', async (req, res) => {
-  const category = await Category.find({ });
-    res.send(category);
+  const category = await Category.find({});
+  res.send(category);
 });
 
 router.put('/:id', isAuth, isAdmin, async (req, res) => {
   const categoryId = req.params.id;
   const category = await Category.findById(categoryId);
+  console.log(category);
   if (category) {
     category.name = req.body.name;
     category.description = req.body.description;
@@ -47,9 +47,7 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
 router.post('/', isAuth, isAdmin, async (req, res) => {
   const category = new Category({
     name: req.body.name,
-    
     description: req.body.description,
-    
   });
   const newCategory = await category.save();
   if (newCategory) {

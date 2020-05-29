@@ -35,6 +35,8 @@ router.post('/signin', async (req, res) => {
       name: signinUser.name,
       email: signinUser.email,
       isAdmin: signinUser.isAdmin,
+      isSeller:signinUser.isSeller,
+      isDeliveryPerson:signinUser.isDeliveryPerson,
       token: getToken(signinUser),
     });
   } else {
@@ -55,6 +57,8 @@ router.post('/register', async (req, res) => {
       name: newUser.name,
       email: newUser.email,
       isAdmin: newUser.isAdmin,
+      isSeller:newUser.isSeller,
+      isDeliveryPerson:newUser.isDeliveryPerson,
       token: getToken(newUser),
     });
   } else {
@@ -76,5 +80,37 @@ router.get('/createadmin', async (req, res) => {
     res.send({ msg: error.message });
   }
 });
+
+router.get('/seller' , async(req,res) =>{
+  try{
+    const user = new User({
+      name:'abc',
+      email:'abc@example.com',
+      password:'1111',
+      isSeller:true
+
+    });
+    const newUser = await user.save();
+    res.send(newUser);
+  }catch(error){
+    res.send({msg:error.message});
+  }
+})
+
+router.get('/delivery-person' , async(req,res) =>{
+  try{
+    const user = new User({
+      name:'def',
+      email:'def@example.com',
+      password:'0000',
+      isDeliveryPerson:true
+
+    });
+    const newUser = await user.save();
+    res.send(newUser);
+  }catch(error){
+    res.send({msg:error.message});
+  }
+})
 
 export default router;

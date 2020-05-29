@@ -51,6 +51,28 @@ function App() {
                 </ul>
               </div>
             )}
+            {userInfo && userInfo.isSeller && (
+              <div className="dropdown">
+                <a href="#">Seller</a>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/orders">Orders</Link>
+                    <Link to="/products">Products</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+            {userInfo && userInfo.isDeliveryPerson && (
+              <div className="dropdown">
+                <a href="#">DeliveryPerson</a>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/orders">Orders</Link>
+                    <Link to="/products">Products</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </header>
         <aside className="sidebar">

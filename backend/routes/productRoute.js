@@ -1,8 +1,38 @@
 import express from 'express';
 import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
-
+const multer = require('multer');
 const router = express.Router();
+
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '/images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}_${file.originalname}`)
+    },
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname)
+        if (ext !== '.jpg' || ext !== '.png') {
+            return cb(res.status(400).end('only jpg, png are allowed'), false);
+        }
+        cb(null, true)
+    }
+})
+
+var upload = multer({ storage: storage }).single("file")
+
+router.post("/uploadImage",  isAuth, isAdmin,(req, res) => {
+
+  upload(req, res, err => {
+      if (err) {
+          return res.json({ success: false, err })
+      }
+      return res.json({ success: true, images: res.req.file.path, fileName: res.req.file.filename })
+  })
+
+});
+
 
 router.get('/', async (req, res) => {
   const category = req.query.category ? { category: req.query.category } : {};

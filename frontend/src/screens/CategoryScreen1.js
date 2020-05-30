@@ -24,7 +24,7 @@ function CategoryScreen1(props) {
     {loading ? <div>Loading...</div> :
       error ? <div>{error} </div> :
         (
-          <div className="details">
+          <div className="details-info">
             
                 <li>
                   <h4>{category.name}</h4>

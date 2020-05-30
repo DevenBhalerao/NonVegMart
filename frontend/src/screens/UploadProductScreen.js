@@ -5,6 +5,8 @@ import {
   listProducts,
   deleteProdcut,
 } from '../actions/productActions';
+import  FileUpload  from '../components/utils/FileUploads';
+
 
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -73,6 +75,12 @@ function ProductsScreen(props) {
   const deleteHandler = (product) => {
     dispatch(deleteProdcut(product._id));
   };
+
+  const [Images, setImages] = useState([])
+
+  const updateImages = (newImages) => {
+    setImages(newImages)
+}
   return (
     <div className="content content-margined">
       <div className="product-header">
@@ -114,14 +122,12 @@ function ProductsScreen(props) {
                 ></input>
               </li>
               <li>
-                <label htmlFor="image">Image</label>
-                <input
-                  type="text"
-                  name="image"
-                  value={image}
-                  id="image"
-                  onChange={(e) => setImage(e.target.value)}
-                ></input>
+                
+                <FileUpload refreshFunction={updateImages} />
+                <br/>
+                <br/>
+
+
               </li>
               <li>
                 <label htmlFor="brand">Brand</label>
@@ -194,7 +200,7 @@ function ProductsScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products && products.map((product) => (
               <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>

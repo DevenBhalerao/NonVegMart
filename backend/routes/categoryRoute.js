@@ -2,12 +2,15 @@ import express from 'express';
 import Category from '../models/categoryModel';
 import { isAuth, isAdmin } from '../util';
 
+
 const router = express.Router();
 
 router.get('/:id', async (req, res) => {
   const category = await Category.findOne({ _id: req.params.id });
+ 
   if (category) {
     res.send(category);
+   
   } else {
     res.status(404).send({ message: 'Category Not Found.' });
   }

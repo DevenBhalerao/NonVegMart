@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
+import { listCategory } from '../actions/categoryActions';
 
 function HomeScreen(props) {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -13,7 +14,7 @@ function HomeScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listProducts(category));
-
+    dispatch(listCategory(category));
     return () => {
       //
     };

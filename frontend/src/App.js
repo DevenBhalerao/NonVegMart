@@ -64,7 +64,11 @@ function App() {
             )}
             {userInfo && userInfo.isDeliveryPerson && (
               <div className="dropdown">
+<<<<<<< HEAD
                 <a href="#">DeliveryPerson</a>
+=======
+                <a href="#">Delivery Person</a>
+>>>>>>> f853738f7cf84257a08b22deeb30ac338be3b070
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/orders">Orders</Link>

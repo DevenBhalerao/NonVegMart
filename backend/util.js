@@ -57,4 +57,8 @@ const isDeliveryPerson = (req,res,next) =>{
   return res.status(401).send({msg: 'Delivery Person token not valid'});
 }
 
+<<<<<<< HEAD
 export { getToken, isAuth, isAdmin, isSeller,isDeliveryPerson };
+=======
+export { getToken, isAuth, isAdmin, isSeller,isDeliveryPerson };
+>>>>>>> f853738f7cf84257a08b22deeb30ac338be3b070

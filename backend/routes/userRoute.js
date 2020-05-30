@@ -88,6 +88,7 @@ router.get('/createadmin', async (req, res) => {
 router.get('/seller' , async(req,res) =>{
   try{
     const user = new User({
+<<<<<<< HEAD
       name:'abcde',
       email:'abcde@example.com',
       password:'0101',
@@ -95,6 +96,16 @@ router.get('/seller' , async(req,res) =>{
     });
     const newUser = await user.save();
     res.send(newUser)
+=======
+      name:'abc',
+      email:'abc@example.com',
+      password:'1111',
+      isSeller:true
+
+    });
+    const newUser = await user.save();
+    res.send(newUser);
+>>>>>>> f853738f7cf84257a08b22deeb30ac338be3b070
   }catch(error){
     res.send({msg:error.message});
   }
@@ -116,4 +127,8 @@ router.get('/delivery-person' , async(req,res) =>{
   }
 })
 
+<<<<<<< HEAD
 export default router;
+=======
+export default router;
+>>>>>>> f853738f7cf84257a08b22deeb30ac338be3b070

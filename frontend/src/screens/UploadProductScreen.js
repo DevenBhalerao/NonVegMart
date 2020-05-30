@@ -5,16 +5,15 @@ import {
   listProducts,
   deleteProdcut,
 } from '../actions/productActions';
-import  FileUpload  from '../components/utils/FileUploads';
-
+import FileUpload from '../components/utils/FileUploads';
 
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
   const [brand, setBrand] = useState('');
+  const [Images, setImages] = useState([]);
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
@@ -52,7 +51,7 @@ function ProductsScreen(props) {
     setName(product.name);
     setPrice(product.price);
     setDescription(product.description);
-    setImage(product.image);
+    setImages(product.image);
     setBrand(product.brand);
     setCategory(product.category);
     setCountInStock(product.countInStock);
@@ -64,7 +63,7 @@ function ProductsScreen(props) {
         _id: id,
         name,
         price,
-        image,
+        image: Images,
         brand,
         category,
         countInStock,
@@ -76,11 +75,9 @@ function ProductsScreen(props) {
     dispatch(deleteProdcut(product._id));
   };
 
-  const [Images, setImages] = useState([])
-
   const updateImages = (newImages) => {
-    setImages(newImages)
-}
+    setImages(newImages);
+  };
   return (
     <div className="content content-margined">
       <div className="product-header">
@@ -122,12 +119,9 @@ function ProductsScreen(props) {
                 ></input>
               </li>
               <li>
-                
                 <FileUpload refreshFunction={updateImages} />
-                <br/>
-                <br/>
-
-
+                <br />
+                <br />
               </li>
               <li>
                 <label htmlFor="brand">Brand</label>
@@ -200,26 +194,30 @@ function ProductsScreen(props) {
             </tr>
           </thead>
           <tbody>
-            {products && products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-                <td>
-                  <button className="button" onClick={() => openModal(product)}>
-                    Edit
-                  </button>{' '}
-                  <button
-                    className="button"
-                    onClick={() => deleteHandler(product)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {products &&
+              products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product._id}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+                  <td>
+                    <button
+                      className="button"
+                      onClick={() => openModal(product)}
+                    >
+                      Edit
+                    </button>{' '}
+                    <button
+                      className="button"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

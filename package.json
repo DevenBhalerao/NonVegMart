@@ -36,9 +36,6 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": ""
-  },
   "homepage": "",
   "engines": {
     "node": "12.4.0",

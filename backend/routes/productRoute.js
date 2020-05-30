@@ -1,38 +1,35 @@
+/* eslint-disable indent */
+import multer from 'multer';
 import express from 'express';
+import path from 'path';
 import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
-const multer = require('multer');
+
 const router = express.Router();
 
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '/images')
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_${file.originalname}`)
-    },
-    fileFilter: (req, file, cb) => {
-        const ext = path.extname(file.originalname)
-        if (ext !== '.jpg' || ext !== '.png') {
-            return cb(res.status(400).end('only jpg, png are allowed'), false);
-        }
-        cb(null, true)
-    }
-})
-
-var upload = multer({ storage: storage }).single("file")
-
-router.post("/uploadImage",  isAuth, isAdmin,(req, res) => {
-
-  upload(req, res, err => {
-      if (err) {
-          return res.json({ success: false, err })
-      }
-      return res.json({ success: true, images: res.req.file.path, fileName: res.req.file.filename })
-  })
-
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../../frontend/images'));
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
 });
 
+const upload = multer({ storage }).single('file');
+
+router.post('/uploadImage', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+    return res.json({
+      success: true,
+      images: res.req.file.path,
+      fileName: res.req.file.filename,
+    });
+  });
+});
 
 router.get('/', async (req, res) => {
   const category = req.query.category ? { category: req.query.category } : {};
@@ -44,12 +41,14 @@ router.get('/', async (req, res) => {
         },
       }
     : {};
+  // eslint-disable-next-line no-nested-ternary
   const sortOrder = req.query.sortOrder
     ? req.query.sortOrder === 'lowest'
       ? { price: 1 }
       : { price: -1 }
     : { _id: -1 };
   const products = await Product.find({ ...category, ...searchKeyword }).sort(
+    // eslint-disable-next-line comma-dangle
     sortOrder
   );
   res.send(products);

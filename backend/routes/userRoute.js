@@ -61,6 +61,10 @@ router.post('/register', async (req, res) => {
       isDeliveryPerson:newUser.isDeliveryPerson,
       token: getToken(newUser),
     });
+    if(isSeller === true){
+      _sellerid = _id
+    }
+    newUser = await user.save();
   } else {
     res.status(401).send({ msg: 'Invalid User Data.' });
   }
@@ -84,14 +88,13 @@ router.get('/createadmin', async (req, res) => {
 router.get('/seller' , async(req,res) =>{
   try{
     const user = new User({
-      name:'abc',
-      email:'abc@example.com',
-      password:'1111',
-      isSeller:true
-
+      name:'abcde',
+      email:'abcde@example.com',
+      password:'0101',
+      isSeller:true,
     });
     const newUser = await user.save();
-    res.send(newUser);
+    res.send(newUser)
   }catch(error){
     res.send({msg:error.message});
   }

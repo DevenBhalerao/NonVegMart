@@ -1,6 +1,6 @@
 import express from 'express';
 import Product from '../models/productModel';
-import { isAuth, isAdmin } from '../util';
+import { isAuth, isAdmin ,isSeller} from '../util';
 
 const router = express.Router();
 
@@ -85,5 +85,40 @@ router.post('/', isAuth, isAdmin, async (req, res) => {
   }
   return res.status(500).send({ message: ' Error in Creating Product.' });
 });
+
+// product of seller
+
+router.get('/sellerproduct/:id' /* ,isAuth, isSeller ,*/, async(req,res) =>{
+  const product = await Product.findOne({ sellerid: req.params.id });
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found.' });
+  }
+})
+
+router.post('/sellerproduct', /*isAuth, isSeller*/ async(req,res)=>{
+  const product = new Product({
+    sellerid:req.body.sellerid,
+    name: req.body.name,
+    price: req.body.price,
+    image: req.body.image,
+    brand: req.body.brand,
+    category: req.body.category,
+    countInStock: req.body.countInStock,
+    description: req.body.description,
+    rating: req.body.rating,
+    numReviews: req.body.numReviews,
+  })
+  const newProduct = await product.save();
+  if(newProduct){
+    return res
+      .status(201)
+      .send({message:'New Product Created , data:newProduct '});
+  }
+  return res.status(500).send({ message:"Error in Creating Product."})
+})
+
+
 
 export default router;

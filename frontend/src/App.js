@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
+import './index.css';
 import HomeScreen from './screens/HomeScreen1';
 import ProductScreen from './screens/ProductScreen1';
 import CartScreen from './screens/CartScreen';
@@ -14,11 +15,14 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import OrdersScreen from './screens/OrdersScreen';
+import UploadCategoryScreen from './screens/UploadCategoryScreen';
+import CategoryScreen1 from './screens/CategoryScreen1';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
+  const categoryList = useSelector((state) => state.categoryList);
+  const { loading, category, error } = categoryList;
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');
   };
@@ -47,6 +51,7 @@ function App() {
                   <li>
                     <Link to="/orders">Orders</Link>
                     <Link to="/products">Products</Link>
+                    <Link to="/categories">Categories</Link>
                   </li>
                 </ul>
               </div>
@@ -58,15 +63,16 @@ function App() {
           <button className="sidebar-close-button" onClick={closeMenu}>
             x
           </button>
-          <ul className="categories">
-            <li>
-              <Link to="/category/Fish">Fish</Link>
-            </li>
-
-            <li>
-              <Link to="/category/Chicken">Chicken</Link>
-            </li>
-          </ul>
+          <table className="categories">
+          
+            {category &&
+              category.map((category) => (
+                <tr key={category._id}>
+                  <td> <Link to={'/category/' + category._id}>{category.name}</Link>
+                  </td></tr>
+                ))}
+           </table>
+        
         </aside>
         <main className="main">
           <div className="content">
@@ -74,6 +80,7 @@ function App() {
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/order/:id" component={OrderScreen} />
             <Route path="/products" component={UploadProductsScreen} />
+            <Route path="/categories" component={UploadCategoryScreen} />
             <Route path="/shipping" component={ShippingScreen} />
             <Route path="/payment" component={PaymentScreen} />
             <Route path="/placeorder" component={PlaceOrderScreen} />
@@ -81,7 +88,7 @@ function App() {
             <Route path="/register" component={RegisterScreen} />
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/category/:id" component={HomeScreen} />
+            <Route path="/category/:id" component={CategoryScreen1} />
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>

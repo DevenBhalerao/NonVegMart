@@ -35,8 +35,6 @@ const aws = require('aws-sdk');
 
 const S3_BUCKET = 'nonvegmartbucket';
 
-aws.config.loadFromPath('backend\\routes\\aws_cred.json');
-
 const s3config = new aws.S3();
 
 const multerS3Config = multerS3({

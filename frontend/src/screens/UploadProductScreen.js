@@ -76,6 +76,7 @@ function ProductsScreen(props) {
   };
 
   const updateImages = (newImages) => {
+    console.log(newImages);
     setImages(newImages);
   };
   return (
@@ -208,7 +209,8 @@ function ProductsScreen(props) {
                       onClick={() => openModal(product)}
                     >
                       Edit
-                    </button>{' '}
+                    </button>
+                    {''}
                     <button
                       className="button"
                       onClick={() => deleteHandler(product)}

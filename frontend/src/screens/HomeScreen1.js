@@ -29,6 +29,8 @@ function HomeScreen(props) {
     dispatch(listProducts(category, searchKeyword, sortOrder));
   };
 
+  const S3_BUCKET_URL = 'https://nonvegmartbucket.s3.ap-south-1.amazonaws.com/';
+
   return (
     <>
       {category && <h2>{category}</h2>}

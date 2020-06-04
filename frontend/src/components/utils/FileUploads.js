@@ -14,19 +14,20 @@ function FileUpload(props) {
       Authorization: 'Bearer ' + userInfo.token,
     };
     formData.append('file', files[0]);
+    //console.log(formData);
     //save the Image we chose inside the Node Server
-    Axios.post('/api/products/uploadImage', formData, config).then(
-      (response) => {
-        if (response.data.success) {
-          //console.log(response);
-          setImages([...Images, response.data.fileName]);
-          props.refreshFunction([...Images, response.data.fileName]);
-        } else {
-          //console.log(response);
-          alert('Failed to save the Image in Server');
-        }
+    Axios.post('/api/products/uploadImage', formData, config).then((res) => {
+      console.log('in fileupload');
+      console.log(res);
+      if (res.data.success) {
+        console.log('success');
+        setImages([...Images, res.data.images]);
+        props.refreshFunction([...Images, res.data.images]);
+      } else {
+        //console.log(response);
+        alert('Failed to save the Image in Server');
       }
-    );
+    });
   };
 
   const onDelete = (image) => {

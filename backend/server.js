@@ -9,6 +9,7 @@ import orderRoute from './routes/orderRoute';
 import categoryRoute from './routes/categoryRoute';
 
 const mongodbUrl = config.MONGODB_URL;
+
 mongoose
 
   .connect(mongodbUrl, {
@@ -38,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
     console.log('Server started at heroku');
   });
 } else {
-  app.use(express.static(path.join(__dirname, '/../frontend/images')));
+  app.use(express.static(path.join(__dirname, '/../frontend/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(`${__dirname}/../frontend/public/index.html`));
   });

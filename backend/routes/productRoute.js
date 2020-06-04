@@ -1,25 +1,15 @@
 /* eslint-disable indent */
 import multer from 'multer';
 import express from 'express';
-import path from 'path';
 import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
+import { uploadFile } from '../upload_util';
+
+const multerS3 = require('multer-s3');
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../frontend/build'));
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}_${file.originalname}`);
-  },
-});
-
-const upload = multer({ storage }).single('file');
-
-router.post('/uploadImage', (req, res) => {
-  upload(req, res, (err) => {
+/* upload(req, res, (err) => {
     if (err) {
       return res.json({ success: false, err });
     }
@@ -29,6 +19,87 @@ router.post('/uploadImage', (req, res) => {
       fileName: res.req.file.filename,
     });
   });
+  const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '../../frontend/build'));
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}_${file.originalname}`);
+  },
+});
+*/
+
+//router.post('/uploadImage', upload.array('file'), (req, res) => {});
+
+const aws = require('aws-sdk');
+
+const S3_BUCKET = 'nonvegmartbucket';
+
+aws.config.loadFromPath('backend\\routes\\aws_cred.json');
+
+const s3config = new aws.S3();
+
+const multerS3Config = multerS3({
+  s3: s3config,
+  bucket: S3_BUCKET,
+  metadata: function (req, file, cb) {
+    cb(null, { fieldName: file.fieldname });
+  },
+  key: function (req, file, cb) {
+    //(file);
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+  onError: function (err) {
+    console.log('error');
+  },
+});
+
+const upload = multer({
+  storage: multerS3Config,
+}).single('file');
+
+router.post('/uploadImage', (req, res) => {
+  upload(req, res, (err) => {
+    //console.log('uploadimage');
+    //console.log(res.req.file);
+    if (err) {
+      return res.json({ success: false, err });
+    }
+    console.log(res.req.file.location);
+    return res.json({
+      success: true,
+      images: res.req.file.location,
+      fileName: res.req.file.key,
+    });
+  });
+  /*const s3 = new aws.S3();
+  console.log(req);
+  const uploadFileObject = req.file;
+  //console.log(uploadFile[0].originalname);
+  //console.log(uploadFile[0].mimetype);
+  const fileName = uploadFileObject.originalname;
+  const fileType = uploadFileObject.mimetype;
+  const s3Params = {
+    Bucket: S3_BUCKET,
+    Key: Date.now() + fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read',
+  };
+
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    //console.log('in signed');
+    if (err) {
+      console.log(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+    };
+    //console.log(returnData);
+    uploadFile(uploadFileObject, returnData.signedRequest, returnData.url);
+  });*/
 });
 
 router.get('/', async (req, res) => {

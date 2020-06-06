@@ -37,7 +37,7 @@ const sellerlistProducts = () => async (dispatch , getState) => {
     } = getState();
     // console.log(userInfo);
     const{ data} = await axios.get("/api/products/sellerproduct/" + userInfo._id)
-    console.log(data)  
+   
     dispatch({
       type: SELLER_PRODUCT_LIST_SUCCESS,
       payload: data
@@ -52,17 +52,22 @@ const sellerlistProducts = () => async (dispatch , getState) => {
 }
 
 const sellersaveProduct = (product) => async (dispatch, getState) => {
+  
   try {
     dispatch({
       type: SELLER_PRODUCT_SAVE_REQUEST,
       payload: product
     });
+  
     const {
       userSignin: {
         userInfo
       }
     } = getState();
+    console.log(userInfo)
+    product.sellerid = userInfo._id;
     if (!product._id) {
+      console.log("In seller product action")
       const {
         data
       } = await Axios.post('/api/products/sellerproduct/', product, {
@@ -70,6 +75,7 @@ const sellersaveProduct = (product) => async (dispatch, getState) => {
           'Authorization': 'Bearer ' + userInfo.token
         }
       });
+
       dispatch({
         type: SELLER_PRODUCT_SAVE_SUCCESS,
         payload: data

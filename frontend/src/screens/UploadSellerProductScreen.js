@@ -14,7 +14,7 @@ function SellerProductsScreen(props) {
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
   const sellerProductList = useSelector(state => state.sellerProductList);
-  console.log(sellerProductList)
+
   const {loading, products, error } = sellerProductList;
 
 
@@ -49,6 +49,7 @@ function SellerProductsScreen(props) {
   }
   const submitHandler = (e) => {
     e.preventDefault();
+    
     dispatch(sellersaveProduct({
       _id: id,
       sellerid:sellerid,

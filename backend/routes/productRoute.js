@@ -99,7 +99,8 @@ router.get('/sellerproduct/:id' /* ,isAuth, isSeller ,*/, async(req,res) =>{
   }
 })
 // console.log(product);
-router.post('/sellerproduct', /*isAuth, isSeller*/ async(req,res)=>{
+router.post('/sellerproduct/', /*isAuth, isSeller*/ async(req,res)=>{
+  console.log("inside seller product api")
   const product = new Product({
     sellerid:req.body.sellerid,
     name: req.body.name,

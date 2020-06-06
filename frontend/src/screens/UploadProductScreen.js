@@ -5,8 +5,13 @@ import {
   listProducts,
   deleteProdcut,
 } from '../actions/productActions';
+import {
+  saveCategory,
+  listCategory,
+  deleteCategory,
+} from '../actions/categoryActions';
 import FileUpload from '../components/utils/FileUploads';
-
+import CharacterDropDown from '../components/utils/CharacterDropDown';
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
@@ -14,11 +19,15 @@ function ProductsScreen(props) {
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
   const [Images, setImages] = useState([]);
-  const [category, setCategory] = useState('');
+  const [category1, setCategory] = useState('');
+  const [categoryId,setCategoryId] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
   const productList = useSelector((state) => state.productList);
   const { loading, products, error } = productList;
+  const categoryList = useSelector((state) => state.categoryList);
+  
+  const { category } = categoryList;
 
   const productSave = useSelector((state) => state.productSave);
   const {
@@ -40,6 +49,8 @@ function ProductsScreen(props) {
       setModalVisible(false);
     }
     dispatch(listProducts());
+    dispatch(listCategory());
+
     return () => {
       //
     };
@@ -54,7 +65,9 @@ function ProductsScreen(props) {
     setImages(product.image);
     setBrand(product.brand);
     setCategory(product.category);
+    setCategoryId(product.categoryId);
     setCountInStock(product.countInStock);
+    
   };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -66,6 +79,7 @@ function ProductsScreen(props) {
         image: Images,
         brand,
         category,
+        categoryId: categoryId,
         countInStock,
         description,
       })
@@ -78,6 +92,19 @@ function ProductsScreen(props) {
   const updateImages = (newImages) => {
     setImages(newImages);
   };
+
+  const  dropdown = (categoryId) => {console.log(categoryId.key)
+    console.log(categoryId.value)
+  setCategoryId(categoryId)};
+
+  
+  
+  //const setdrop = (value) => {
+   // console.log(value);
+ // };
+  
+
+  
   return (
     <div className="content content-margined">
       <div className="product-header">
@@ -144,15 +171,21 @@ function ProductsScreen(props) {
                 ></input>
               </li>
               <li>
-                <label htmlFor="name">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  value={category}
-                  id="category"
-                  onChange={(e) => setCategory(e.target.value)}
-                ></input>
+              <select 
+              value={category}
+              onChange={e => dropdown(e.currentTarget)}
+              >
+                   
+                    {category.map(({ name, _id }) => (
+    <option key={name} value={_id+'_'+name}>
+      {name}
+    </option>
+  ))}
+</select>
+
+                
               </li>
+              
               <li>
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -188,6 +221,7 @@ function ProductsScreen(props) {
               <th>ID</th>
               <th>Name</th>
               <th>Price</th>
+              
               <th>Category</th>
               <th>Brand</th>
               <th>Action</th>
@@ -200,7 +234,11 @@ function ProductsScreen(props) {
                   <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
+                 
                   <td>{product.category}</td>
+                 
+                  
+
                   <td>{product.brand}</td>
                   <td>
                     <button

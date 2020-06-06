@@ -72,6 +72,7 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
     product.image = req.body.image;
     product.brand = req.body.brand;
     product.category = req.body.category;
+    product.categoryId = req.body.categoryId;
     product.countInStock = req.body.countInStock;
     product.description = req.body.description;
     const updatedProduct = await product.save();
@@ -94,13 +95,14 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
   }
 });
 
-router.post('/', isAuth, isAdmin, async (req, res) => {
+router.post('/',  async (req, res) => {
   const product = new Product({
     name: req.body.name,
     price: req.body.price,
     image: req.body.image,
     brand: req.body.brand,
     category: req.body.category,
+    categoryId: req.body.categoryId,
     countInStock: req.body.countInStock,
     description: req.body.description,
     rating: req.body.rating,

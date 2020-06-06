@@ -66,7 +66,7 @@ function App() {
           <table className="categories">
           
             {category &&
-              category.map((category) => (
+              category.map((category => 
                 <tr key={category._id}>
                   <td> <Link to={'/category/' + category._id}>{category.name}</Link>
                   </td></tr>

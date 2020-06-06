@@ -1,15 +1,53 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  compose
+} from 'redux';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
-import { productListReducer, productDetailsReducer, productSaveReducer, productDeleteReducer } from './reducers/productReducers';
-import { cartReducer } from './reducers/cartReducers'
-import { userSigninReducer, userRegisterReducer, userUpdateReducer } from './reducers/userReducers';
-import { orderCreateReducer, orderDetailsReducer, orderPayReducer, myOrderListReducer, orderListReducer, orderDeleteReducer } from './reducers/orderReducers';
+import{
+  sellerproductListReducer,
+  sellerproductDetailsReducer,
+  sellerproductSaveReducer,
+  sellerproductDeleteReducer
+} from './reducers/sellerProductReducers'
+import {
+  productListReducer,
+  productDetailsReducer,
+  productSaveReducer,
+  productDeleteReducer,
+} from './reducers/productReducers';
+import {
+  cartReducer
+} from './reducers/cartReducers'
+import {
+  userSigninReducer,
+  userRegisterReducer,
+  userUpdateReducer
+} from './reducers/userReducers';
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+  myOrderListReducer,
+  orderListReducer,
+  orderDeleteReducer
+} from './reducers/orderReducers';
 
 const cartItems = Cookie.getJSON("cartItems") || [];
 const userInfo = Cookie.getJSON("userInfo") || null;
 
-const initialState = { cart: { cartItems, shipping: {}, payment: {} }, userSignin: { userInfo } };
+const initialState = {
+  cart: {
+    cartItems,
+    shipping: {},
+    payment: {}
+  },
+  userSignin: {
+    userInfo
+  }
+};
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -24,7 +62,11 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   myOrderList: myOrderListReducer,
   orderList: orderListReducer,
-  orderDelete: orderDeleteReducer
+  orderDelete: orderDeleteReducer,
+  sellerProductList:sellerproductListReducer,
+  sellerProductDetails: sellerproductDetailsReducer,
+  sellerProductSave: sellerproductSaveReducer,
+  sellerProductDelete:sellerproductDeleteReducer
 
 })
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

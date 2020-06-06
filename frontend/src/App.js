@@ -8,6 +8,7 @@ import SigninScreen from './screens/SigninScreen';
 import { useSelector } from 'react-redux';
 import RegisterScreen from './screens/RegisterScreen';
 import UploadProductsScreen from './screens/UploadProductScreen';
+import UploadSellerProductScreen from './screens/UploadSellerProductScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
@@ -57,18 +58,15 @@ function App() {
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/orders">Orders</Link>
-                    <Link to="/products">Products</Link>
+                    <Link to="/sellerproducts">Seller Products</Link>
                   </li>
                 </ul>
               </div>
             )}
             {userInfo && userInfo.isDeliveryPerson && (
               <div className="dropdown">
-<<<<<<< HEAD
                 <a href="#">DeliveryPerson</a>
-=======
-                <a href="#">Delivery Person</a>
->>>>>>> f853738f7cf84257a08b22deeb30ac338be3b070
+
                 <ul className="dropdown-content">
                   <li>
                     <Link to="/orders">Orders</Link>
@@ -109,6 +107,7 @@ function App() {
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/category/:id" component={HomeScreen} />
             <Route path="/" exact={true} component={HomeScreen} />
+            <Route path="/sellerproducts" component={UploadSellerProductScreen} />
           </div>
         </main>
         <footer className="footer">All right reserved.</footer>

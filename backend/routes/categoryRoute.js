@@ -13,6 +13,7 @@ router.get('/:id', async (req, res) => {
     res.status(404).send({ message: 'Category Not Found.' });
   }
 });
+
 router.get('/', async (req, res) => {
   const category = await Category.find({});
   res.send(category);
@@ -45,7 +46,7 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
   }
 });
 
-router.post('/', isAuth, isAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
   const category = new Category({
     name: req.body.name,
     description: req.body.description,

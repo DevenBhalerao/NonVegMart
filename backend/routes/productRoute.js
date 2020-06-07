@@ -3,7 +3,6 @@ import multer from 'multer';
 import express from 'express';
 import Product from '../models/productModel';
 import { isAuth, isAdmin } from '../util';
-import { uploadFile } from '../upload_util';
 
 const multerS3 = require('multer-s3');
 
@@ -29,7 +28,7 @@ const router = express.Router();
 });
 */
 
-//router.post('/uploadImage', upload.array('file'), (req, res) => {});
+// router.post('/uploadImage', upload.array('file'), (req, res) => {});
 
 const aws = require('aws-sdk');
 
@@ -40,15 +39,11 @@ const s3config = new aws.S3();
 const multerS3Config = multerS3({
   s3: s3config,
   bucket: S3_BUCKET,
-  metadata: function (req, file, cb) {
+  metadata: (req, file, cb) => {
     cb(null, { fieldName: file.fieldname });
   },
-  key: function (req, file, cb) {
-    //(file);
+  key: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname);
-  },
-  onError: function (err) {
-    console.log('error');
   },
 });
 
@@ -58,8 +53,8 @@ const upload = multer({
 
 router.post('/uploadImage', (req, res) => {
   upload(req, res, (err) => {
-    //console.log('uploadimage');
-    //console.log(res.req.file);
+    // console.log('uploadimage');
+    // console.log(res.req.file);
     if (err) {
       return res.json({ success: false, err });
     }
@@ -164,7 +159,7 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
   }
 });
 
-router.post('/',  async (req, res) => {
+router.post('/', async (req, res) => {
   const product = new Product({
     name: req.body.name,
     price: req.body.price,

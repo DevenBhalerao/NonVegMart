@@ -2,7 +2,7 @@
 import multer from 'multer';
 import express from 'express';
 import Product from '../models/productModel';
-import { isAuth, isAdmin } from '../util';
+import { isAuth, isAdmin, isSeller } from '../util';
 
 const multerS3 = require('multer-s3');
 
@@ -105,7 +105,11 @@ router.get('/', async (req, res) => {
         },
       }
     : {};
+<<<<<<< HEAD
   // eslint-disable-next-line no-nested-ternary
+=======
+
+>>>>>>> akshay
   const sortOrder = req.query.sortOrder
     ? req.query.sortOrder === 'lowest'
       ? { price: 1 }
@@ -149,15 +153,18 @@ router.put('/:id', isAuth, isAdmin, async (req, res) => {
   return res.status(500).send({ message: ' Error in Updating Product.' });
 });
 
-router.delete('/:id', isAuth, isAdmin, async (req, res) => {
-  const deletedProduct = await Product.findById(req.params.id);
-  if (deletedProduct) {
-    await deletedProduct.remove();
-    res.send({ message: 'Product Deleted' });
-  } else {
-    res.send('Error in Deletion.');
+router.delete(
+  '/:id',
+  /* isAuth, isAdmin, */ async (req, res) => {
+    const deletedProduct = await Product.findById(req.params.id);
+    if (deletedProduct) {
+      await deletedProduct.remove();
+      res.send({ message: 'Product Deleted' });
+    } else {
+      res.send('Error in Deletion.');
+    }
   }
-});
+);
 
 router.post('/', async (req, res) => {
   const product = new Product({
@@ -180,5 +187,46 @@ router.post('/', async (req, res) => {
   }
   return res.status(500).send({ message: ' Error in Creating Product.' });
 });
+
+// product of seller
+
+router.get('/sellerproduct/:id' /* ,isAuth, isSeller ,*/, async (req, res) => {
+  // console.log("In API")
+  const product = await Product.find({ sellerid: req.params.id });
+  // console.log(product);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found.' });
+  }
+});
+// console.log(product);
+router.post(
+  '/sellerproduct/',
+  /*isAuth, isSeller*/ async (req, res) => {
+    // console.log('inside seller product api');
+    const product = new Product({
+      sellerid: req.body.sellerid,
+      name: req.body.name,
+      price: req.body.price,
+      image: req.body.image,
+      brand: req.body.brand,
+      category: req.body.category,
+      countInStock: req.body.countInStock,
+      description: req.body.description,
+      rating: req.body.rating,
+      numReviews: req.body.numReviews,
+    });
+    const newProduct = await product.save();
+    // console.log(newProduct);
+    if (newProduct) {
+      return res
+        .status(201)
+        .send({ message: 'New Product Created , data:newProduct ' });
+    }
+    console.log(newProduct);
+    return res.status(500).send({ message: 'Error in Creating Product.' });
+  }
+);
 
 export default router;

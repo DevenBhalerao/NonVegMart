@@ -1,3 +1,6 @@
 node_modules
+<<<<<<< HEAD
 /frontend/node_modules
 /backend/routes/aws_cred.json
+=======
+>>>>>>> akshay

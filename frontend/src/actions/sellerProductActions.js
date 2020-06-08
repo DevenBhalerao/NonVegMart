@@ -64,7 +64,7 @@ const sellersaveProduct = (product) => async (dispatch, getState) => {
         userInfo
       }
     } = getState();
-    console.log(userInfo)
+    // console.log(userInfo)
     product.sellerid = userInfo._id;
     if (!product._id) {
       console.log("In seller product action")
@@ -81,17 +81,22 @@ const sellersaveProduct = (product) => async (dispatch, getState) => {
         payload: data
       });
     } else {
+      // product.sellerid = userInfo._id;
+      console.log("hii")
       const {
         data
-      } = await Axios.put('/api/products/sellerproduct/' + product._id, product, {
+      }=await Axios.put('/api/products/sellerproduct/' + product._id, product, {
         headers: {
           'Authorization': 'Bearer ' + userInfo.token
         }
       });
+     
       dispatch({
         type: SELLER_PRODUCT_SAVE_SUCCESS,
         payload: data
       });
+
+      
     }
 
   } catch (error) {

@@ -105,11 +105,7 @@ router.get('/', async (req, res) => {
         },
       }
     : {};
-<<<<<<< HEAD
   // eslint-disable-next-line no-nested-ternary
-=======
-
->>>>>>> akshay
   const sortOrder = req.query.sortOrder
     ? req.query.sortOrder === 'lowest'
       ? { price: 1 }

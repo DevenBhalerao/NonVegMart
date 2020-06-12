@@ -10,7 +10,6 @@ import {
   listCategory,
   deleteCategory,
 } from '../actions/categoryActions';
-import FileUpload from '../components/utils/FileUploads';
 import CharacterDropDown from '../components/utils/CharacterDropDown';
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -146,7 +145,7 @@ function ProductsScreen(props) {
                 ></input>
               </li>
               <li>
-                <FileUpload refreshFunction={updateImages} />
+                
                 <br />
                 <br />
               </li>

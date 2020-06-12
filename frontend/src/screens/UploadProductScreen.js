@@ -147,7 +147,7 @@ function ProductsScreen(props) {
                 ></input>
               </li>
               <li>
-                <FileUpload refreshFunction={updateImages} />
+                
                 <br />
                 <br />
               </li>

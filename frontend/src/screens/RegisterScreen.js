@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../actions/userActions';
+import './css/style.css';
 
 function RegisterScreen(props) {
   const [name, setName] = useState('');
@@ -29,67 +30,67 @@ function RegisterScreen(props) {
     dispatch(register(name, email, password));
   };
   return (
-    <div className="form">
+    <div className="signin__form">
       <form onSubmit={submitHandler}>
-        <ul className="form-container">
-          <li>
-            <h2>Create Account</h2>
-          </li>
-          <li>
+        <div className="form-container">
+          <div>
+            <h4 className="signin-title">Create Account</h4>
+          </div>
+          <div>
             {loading && <div>Loading...</div>}
             {error && <div>{error}</div>}
-          </li>
-          <li>
-            <label htmlFor="name">Name</label>
+          </div>
+          <div className="signin__input">
+            <label htmlFor="name">Name</label><span>*</span>
             <input
               type="name"
               name="name"
               id="name"
               onChange={(e) => setName(e.target.value)}
             ></input>
-          </li>
-          <li>
-            <label htmlFor="email">Email</label>
+          </div>
+          <div className="signin__input">
+            <label htmlFor="email">Email</label><span>*</span>
             <input
               type="email"
               name="email"
               id="email"
               onChange={(e) => setEmail(e.target.value)}
             ></input>
-          </li>
-          <li>
-            <label htmlFor="password">Password</label>
+          </div>
+          <div className="signin__input">
+            <label htmlFor="password">Password</label><span>*</span>
             <input
               type="password"
               id="password"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
             ></input>
-          </li>
-          <li>
-            <label htmlFor="rePassword">Re-Enter Password</label>
+          </div>
+          <div className="signin__input">
+            <label htmlFor="rePassword">Re-Enter Password</label><span>*</span>
             <input
               type="password"
               id="rePassword"
               name="rePassword"
               onChange={(e) => setRePassword(e.target.value)}
             ></input>
-          </li>
-          <li>
-            <button type="submit" className="button primary">
+          </div>
+          <div>
+            <button type="submit" className="site-btn signin__button">
               Register
             </button>
-          </li>
-          <li>
+          </div>
+          <div>
             Already have an account?
             <Link
               to={redirect === '/' ? 'signin' : 'signin?redirect=' + redirect}
               className="button secondary text-center"
             >
-              Create your account
+              Signin
             </Link>
-          </li>
-        </ul>
+          </div>
+        </div>
       </form>
     </div>
   );

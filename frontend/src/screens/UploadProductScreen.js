@@ -10,8 +10,8 @@ import {
   listCategory,
   deleteCategory,
 } from '../actions/categoryActions';
-import CharacterDropDown from '../components/utils/CharacterDropDown';
-import FileUpload from '../components/utils/FileUploads';
+// import CharacterDropDown from '../components/utils/CharacterDropDown';
+// import FileUpload from '../components/utils/FileUploads';
 
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);

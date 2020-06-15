@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signin } from '../actions/userActions';
+import './css/style.css'
+// import '../css/bootstrap-min.css'
 
 function SigninScreen(props) {
   const [email, setEmail] = useState('');
@@ -26,51 +28,51 @@ function SigninScreen(props) {
     dispatch(signin(email, password));
   };
   return (
-    <div className="form">
+    <div className="signin__form">
       <form onSubmit={submitHandler}>
-        <ul className="form-container">
-          <li>
-            <h2>Sign-In</h2>
-          </li>
-          <li>
+        <div className=" col-lg-12 form-container">
+          <div>
+            <h4 className="signin-title">Sign-In</h4>
+          </div>
+          <span>
             {loading && <div>Loading...</div>}
             {error && <div>{error}</div>}
-          </li>
-          <li>
-            <label htmlFor="email">Email</label>
+          </span>
+          <div className="signin__input">
+            <p htmlFor="email">Email<span>*</span></p>
             <input
               type="email"
               name="email"
               id="email"
               onChange={(e) => setEmail(e.target.value)}
             ></input>
-          </li>
-          <li>
-            <label htmlFor="password">Password</label>
+          </div>
+          <div className="signin__input">
+            <label htmlFor="password">Password<span>*</span></label><br></br>
             <input
               type="password"
               id="password"
               name="password"
               onChange={(e) => setPassword(e.target.value)}
             ></input>
-          </li>
-          <li>
-            <button type="submit" className="button primary">
+          </div>
+          <div class="button">
+            <button type="submit" className="site-btn signin__button">
               Signin
             </button>
-          </li>
-          <li>Register</li>
-          <li>
+          </div><br></br>
+          <span>Haven't created an account?</span>
+          <span>
             <Link
               to={
                 redirect === '/' ? 'register' : 'register?redirect=' + redirect
               }
               className="button secondary text-center"
             >
-              Create your account
+              register
             </Link>
-          </li>
-        </ul>
+          </span>
+        </div>
       </form>
     </div>
   );

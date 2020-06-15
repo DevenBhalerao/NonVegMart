@@ -100,12 +100,12 @@ return(
                 </li>
               </ul>
             </div>
-            <div className="header__top__right__auth">
+            {/* <div className="header__top__right__auth">
               <a href="#">
                 <i className="fa fa-user" /> Login
               </a>
       
-            </div>
+            </div> */}
             <div className="header__top__right__auth">
                       <a href="#">
                         <i className="fa fa-user" /> Login
@@ -143,7 +143,7 @@ return(
                 <a href="./index.html">Home</a>
               </li>
               <li>
-                <a href="./shop-grid.html">Shop</a>
+                <a href="">Shop</a>
               </li>
               <li>
                 <a href="#">Pages</a>
@@ -291,7 +291,7 @@ return(
                       <a href="./index.html">Home</a>
                     </li>
                     <li>
-                      <a href="./shop-grid.html">Shop</a>
+                      <a href="/shop">Shop</a>
                     </li>
                     <li>
                       <a href="#">Pages</a>

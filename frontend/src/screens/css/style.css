@@ -2105,6 +2105,27 @@ ol {
 	column-rule: #b2b2b2;
 }
 
+.signin__form h4 {
+	color: #1c1c1c;
+	font-weight: 700;
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 20px;
+	margin-bottom: 25px;
+}
+
+.signin__form p {
+	column-rule: #b2b2b2;
+}
+
+.signin__form{
+	width:350px;
+	margin-left:650px;
+}
+
+.signin__input {
+	margin-bottom: 24px;
+}
+
 .checkout__input {
 	margin-bottom: 24px;
 }
@@ -2113,11 +2134,28 @@ ol {
 	color: #1c1c1c;
 	margin-bottom: 20px;
 }
+.signin__input p {
+	color: #1c1c1c;
+	margin-bottom: 20px;
+}
+
+.signin__input p span {
+	color: #dd2222;
+}
 
 .checkout__input p span {
 	color: #dd2222;
 }
 
+.signin__input input {
+	width: 100%;
+	height: 46px;
+	border: 1px solid #ebebeb;
+	padding-left: 20px;
+	font-size: 16px;
+	color: #b2b2b2;
+	border-radius: 4px;
+}
 .checkout__input input {
 	width: 100%;
 	height: 46px;
@@ -2128,8 +2166,16 @@ ol {
 	border-radius: 4px;
 }
 
+.signin__input input.signin__input__add {
+	margin-bottom: 20px;
+}
+
 .checkout__input input.checkout__input__add {
 	margin-bottom: 20px;
+}
+
+.signin__input input::placeholder {
+	color: #b2b2b2;
 }
 
 .checkout__input input::placeholder {

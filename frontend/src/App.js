@@ -93,6 +93,7 @@ function App() {
             <Route path="/product/:id" component={ProdutScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/category/:id" component={CategoryScreen1} />
+            <Route path="/shop" component={HomeScreen} />
             <Route path="/" exact={true} component={Xyz} />
           </div>
         </main>

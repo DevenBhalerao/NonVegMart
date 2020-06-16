@@ -95,7 +95,7 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
   }
 });
 
-router.post('/',  async (req, res) => {
+router.post('/', async (req, res) => {
   const product = new Product({
     name: req.body.name,
     price: req.body.price,

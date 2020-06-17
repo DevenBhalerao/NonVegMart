@@ -29,7 +29,7 @@ function ProductsScreen(props) {
   const categoryList = useSelector((state) => state.categoryList);
 
   const { category } = categoryList;
-
+  
   const productSave = useSelector((state) => state.productSave);
   const {
     loading: loadingSave,
@@ -177,10 +177,12 @@ function ProductsScreen(props) {
                 <select onChange={(e) => dropdown(e.currentTarget)}>
                   <option key="default" value="default">
                     Please select a category
+                    
                   </option>
                   {category.map(({ name, _id }) => (
                     <option key={name} value={_id + '_' + name}>
                       {name}
+                      
                     </option>
                   ))}
                 </select>

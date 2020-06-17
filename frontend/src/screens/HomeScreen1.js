@@ -4,7 +4,20 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listCategory } from '../actions/categoryActions';
+
+import '../css/style.css';
+import 'jquery-ui-dist/jquery-ui.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import './css/elegant-icons.css';
+import './css/font-awesome.min.css';
+import './css/nice-select.css';
+import './css/owl.carousel.min.css';
+import './css/slicknav.min.css';
 import './css/style.css';
+
+
 
 function HomeScreen(props) {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -29,9 +42,31 @@ function HomeScreen(props) {
     setSortOrder(e.target.value);
     dispatch(listProducts(category, searchKeyword, sortOrder))
   }
+  const [qty, setQty] = useState(1);
+  const handleAddToCart = () => {
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+  }
 
   return <>
-  <section class="product spad">
+    {category &&
+      <h2>{category}</h2>}
+
+    <section class="breadcrumb-section set-bg" data-setbg='${__dirname}/frontend/images/breadcrumb.jpg'>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Shop</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-5">
@@ -62,8 +97,8 @@ function HomeScreen(props) {
                                 </div>
                                 <div class="range-slider">
                                     <div class="price-input">
-                                        <input type="text" id="minamount" />
-                                        <input type="text" id="maxamount" />
+                                        <input type="text" id="minamount"></input>
+                                        <input type="text" id="maxamount"></input>
                                     </div>
                                 </div>
                             </div>
@@ -73,37 +108,37 @@ function HomeScreen(props) {
                             <div class="sidebar__item__color sidebar__item__color--white">
                                 <label for="white">
                                     White
-                                    <input type="radio" id="white" />
+                                    <input type="radio" id="white"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--gray">
                                 <label for="gray">
                                     Gray
-                                    <input type="radio" id="gray" />
+                                    <input type="radio" id="gray"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--red">
                                 <label for="red">
                                     Red
-                                    <input type="radio" id="red" />
+                                    <input type="radio" id="red"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--black">
                                 <label for="black">
                                     Black
-                                    <input type="radio" id="black" />
+                                    <input type="radio" id="black"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--blue">
                                 <label for="blue">
                                     Blue
-                                    <input type="radio" id="blue" />
+                                    <input type="radio" id="blue"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__color sidebar__item__color--green">
                                 <label for="green">
                                     Green
-                                    <input type="radio" id="green" />
+                                    <input type="radio" id="green"></input>
                                 </label>
                             </div>
                         </div>
@@ -112,25 +147,25 @@ function HomeScreen(props) {
                             <div class="sidebar__item__size">
                                 <label for="large">
                                     Large
-                                    <input type="radio" id="large" />
+                                    <input type="radio" id="large"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="medium">
                                     Medium
-                                    <input type="radio" id="medium" />
+                                    <input type="radio" id="medium"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="small">
                                     Small
-                                    <input type="radio" id="small" />
+                                    <input type="radio" id="small"></input>
                                 </label>
                             </div>
                             <div class="sidebar__item__size">
                                 <label for="tiny">
                                     Tiny
-                                    <input type="radio" id="tiny" />
+                                    <input type="radio" id="tiny"></input>
                                 </label>
                             </div>
                         </div>
@@ -141,7 +176,7 @@ function HomeScreen(props) {
                                     <div class="latest-prdouct__slider__item">
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-1.jpg" alt="" />
+                                                <img src="img/latest-product/lp-1.jpg" alt=""></img>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
@@ -150,7 +185,7 @@ function HomeScreen(props) {
                                         </a>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-2.jpg" alt="" />
+                                                <img src="img/latest-product/lp-2.jpg" alt=""></img>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
@@ -159,7 +194,7 @@ function HomeScreen(props) {
                                         </a>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-3.jpg" alt="" />
+                                                <img src="img/latest-product/lp-3.jpg" alt=""></img>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
@@ -170,7 +205,7 @@ function HomeScreen(props) {
                                     <div class="latest-prdouct__slider__item">
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-1.jpg" alt="" />
+                                                <img src="img/latest-product/lp-1.jpg" alt=""></img>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
@@ -179,7 +214,7 @@ function HomeScreen(props) {
                                         </a>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-2.jpg" alt="" />
+                                                <img src="img/latest-product/lp-2.jpg" alt=""></img>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
@@ -188,7 +223,7 @@ function HomeScreen(props) {
                                         </a>
                                         <a href="#" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="img/latest-product/lp-3.jpg" alt="" />
+                                                <img src="img/latest-product/lp-3.jpg" alt=""></img>
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>Crab Pool Security</h6>
@@ -324,17 +359,27 @@ function HomeScreen(props) {
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
                                     <span>Sort By</span>
-                                    <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                    <select name="sortOrder" onChange={sortHandler}>
+                                    <option value="">Newest</option>
+                                    <option value="lowest">Lowest</option>
+                                    <option value="highest">Highest</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4">
+                            <ul className="filter">
+                                <li>
+                                    <form onSubmit={submitHandler}>
+                                    <input name="searchKeyword" onChange={(e) => setSearchKeyword(e.target.value)} />
+                                    <button type="submit">Search</button>
+                                    </form>
+                                </li>
+                                
+                                </ul>
+                                {/* <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
                                     <h6><span>16</span> Products found</h6>
                                 </div>
-                            </div>
+                            </div> */}
                             <div class="col-lg-4 col-md-3">
                                 <div class="filter__option">
                                     <span class="icon_grid-2x2"></span>
@@ -344,186 +389,27 @@ function HomeScreen(props) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-6">
+                        
+                        {
+                            products.map(product =>
+                            <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                <Link to={"/product/" + product._id}><div class="product__item__pic set-bg" data-setbg={product.image}>
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><Link to={'/cart/' + product._id}><i class="fa fa-shopping-cart"></i></Link></li>
                                     </ul>
-                                </div>
+                                   
+                                </div></Link>
                                 <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
+                                    <h6><a href="/product">{product.name}</a></h6>
+                                    <h5>${product.price}</h5>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-6.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-8.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-9.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-10.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-11.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/product/product-12.jpg">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
+                            )}
+                       
                     </div>
                     <div class="product__pagination">
                         <a href="#">1</a>
@@ -535,48 +421,8 @@ function HomeScreen(props) {
             </div>
         </div>
     </section>
-
-    {category &&
-      <h2>{category}</h2>}
-
-    <ul className="filter">
-      <li>
-        <form onSubmit={submitHandler}>
-          <input name="searchKeyword" onChange={(e) => setSearchKeyword(e.target.value)} />
-          <button type="submit">Search</button>
-        </form>
-      </li>
-      <li>
-        Sort By {' '}
-        <select name="sortOrder" onChange={sortHandler}>
-          <option value="">Newest</option>
-          <option value="lowest">Lowest</option>
-          <option value="highest">Highest</option>
-        </select>
-      </li>
-    </ul>
-    {loading ? <div>Loading...</div> :
-      error ? <div>{error}</div> :
-        <ul className="products">
-          {
-            products.map(product =>
-              <li key={product._id}>
-                <div className="product">
-                  <Link to={'/product/' + product._id}>
-                    <img className="product-image" src={product.image} alt="product" />
-
-                  </Link>
-                  <div className="product-name">
-                    <Link to={'/product/' + product._id}>{product.name}</Link>
-                  </div>
-                  <div className="product-brand">{product.brand}</div>
-                  <div className="product-price">${product.price}</div>
-                  <div className="product-rating">{product.rating} Stars ({product.numReiews} Reviews)</div>
-                </div>
-              </li>)
-          }
-        </ul>
-    }
+   
+    
   </>
 
 }

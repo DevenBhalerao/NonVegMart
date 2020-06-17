@@ -266,6 +266,22 @@ return(
                   </ul>
               </div>
             )}
+            {userInfo && userInfo.isSeller && (
+              <div className="header__top__right__language">
+                <a href="#">Seller</a>
+                <span className="arrow_carrot-down" />
+                <ul>
+                  <li>
+                    <Link to="/sellerorders">Orders</Link></li>
+                    <li>
+                    <Link to="/sellerproducts">Products</Link>
+                    </li>
+                    <li>
+                    <Link to="/sellercategories">Categories</Link>
+                  </li>
+                  </ul>
+              </div>
+            )}
           
                 </div>
 
@@ -300,7 +316,7 @@ return(
                           <a href="./shop-details.html">Shop Details</a>
                         </li>
                         <li>
-                          <a href="./shoping-cart.html">Shoping Cart</a>
+                          <a href="./cart">Shoping Cart</a>
                         </li>
                         <li>
                           <a href="./checkout.html">Check Out</a>
@@ -398,7 +414,7 @@ return(
                 100% Organic
               </h2>
                     <p>Free Pickup and Delivery Available</p>
-                    <a href="#" className="primary-btn">
+                    <a href="/shop" className="primary-btn">
                       SHOP NOW
               </a>
                   </div>

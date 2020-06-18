@@ -12,7 +12,7 @@ import {
 } from '../actions/categoryActions';
 // import CharacterDropDown from '../components/utils/CharacterDropDown';
 // import FileUpload from '../components/utils/FileUploads';
-
+import './css/style.css';
 function ProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
@@ -110,24 +110,25 @@ function ProductsScreen(props) {
   return (
     <div className="content content-margined">
       <div className="product-header">
-        <h3>Products</h3>
-        <button className="button primary" onClick={() => openModal({})}>
+        <h4 className="signin-title">Products</h4>
+        <button className="btn-primary" onClick={() => openModal({})}>
           Create Product
         </button>
+        
       </div>
       {modalVisible && (
-        <div className="form">
+        <div className="signin__form">
           <form onSubmit={submitHandler}>
-            <ul className="form-container">
-              <li>
-                <h2>Create Product</h2>
-              </li>
-              <li>
+            <div className="form-container">
+              <div>
+                <h4 class="signin__title">Create Product</h4>
+              </div>
+              <div>
                 {loadingSave && <div>Loading...</div>}
                 {errorSave && <div>{errorSave}</div>}
-              </li>
+              </div>
 
-              <li>
+              <div className="signin__input">
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
@@ -136,8 +137,8 @@ function ProductsScreen(props) {
                   id="name"
                   onChange={(e) => setName(e.target.value)}
                 ></input>
-              </li>
-              <li>
+              </div>
+              <div className="signin__input">
                 <label htmlFor="price">Price</label>
                 <input
                   type="text"
@@ -146,13 +147,9 @@ function ProductsScreen(props) {
                   id="price"
                   onChange={(e) => setPrice(e.target.value)}
                 ></input>
-              </li>
-              <li>
-                
-                <br />
-                <br />
-              </li>
-              <li>
+              </div>
+             
+              <div className="signin__input">
                 <label htmlFor="brand">Brand</label>
                 <input
                   type="text"
@@ -161,8 +158,8 @@ function ProductsScreen(props) {
                   id="brand"
                   onChange={(e) => setBrand(e.target.value)}
                 ></input>
-              </li>
-              <li>
+              </div>
+              <div className="signin__input">
                 <label htmlFor="countInStock">CountInStock</label>
                 <input
                   type="text"
@@ -171,13 +168,12 @@ function ProductsScreen(props) {
                   id="countInStock"
                   onChange={(e) => setCountInStock(e.target.value)}
                 ></input>
-              </li>
-              <li>
-                <label htmlFor="Category">Catgeory</label>
-                <select onChange={(e) => dropdown(e.currentTarget)}>
-                  <option key="default" value="default">
-                    Please select a category
-                    
+              </div>
+              <div className="signin__input">
+                <label htmlFor="Category">Catgeory</label><br></br>
+                <select className="cattext" onChange={(e) => dropdown(e.currentTarget)}>
+                  <option  key="default" value="default">
+                    Please select a category  
                   </option>
                   {category.map(({ name, _id }) => (
                     <option key={name} value={_id + '_' + name}>
@@ -186,40 +182,40 @@ function ProductsScreen(props) {
                     </option>
                   ))}
                 </select>
-              </li>
+              </div>
 
-              <li>
-                <label htmlFor="description">Description</label>
-                <textarea
+              <div className="signin__input">
+                <label htmlFor="description">Description</label><br></br>
+                <textarea className="destext"
+                  type="message"
                   name="description"
                   value={description}
                   id="description"
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
-              </li>
-              <li>
-                <button type="submit" className="button primary">
+              </div>
+            
+                <button type="submit" className="button site-btn">
                   {id ? 'Update' : 'Create'}
                 </button>
-              </li>
-              <li>
                 <button
                   type="button"
                   onClick={() => setModalVisible(false)}
-                  className="button secondary"
+                  className="back__button "
                 >
                   Back
                 </button>
-              </li>
-            </ul>
+              
+              
+            </div>
           </form>
         </div>
       )}
 
       <div className="product-list">
         <table className="table">
-          <thead>
-            <tr>
+              <thead>
+              <tr>
               <th>ID</th>
               <th>Name</th>
               <th>Price</th>
@@ -241,14 +237,14 @@ function ProductsScreen(props) {
 
                   <td>{product.brand}</td>
                   <td>
-                    <button
-                      className="button"
+                    <button 
+                      className="site-btn2"
                       onClick={() => openModal(product)}
                     >
                       Edit
                     </button>{' '}
                     <button
-                      className="button"
+                      className="back__button2"
                       onClick={() => deleteHandler(product)}
                     >
                       Delete
@@ -258,8 +254,8 @@ function ProductsScreen(props) {
               ))}
           </tbody>
         </table>
-      </div>
-    </div>
+        </div>
+        </div>
   );
 }
 export default ProductsScreen;

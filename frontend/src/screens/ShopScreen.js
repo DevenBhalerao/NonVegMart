@@ -422,6 +422,7 @@ function HomeScreen(props) {
         </div>
     </section>
    
+   <script src="./js/jquery-ui.min.js"></script>
     
   </>
 

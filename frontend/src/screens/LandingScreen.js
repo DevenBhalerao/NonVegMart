@@ -15,7 +15,7 @@ import './css/owl.carousel.min.css';
 import './css/slicknav.min.css';
 import './css/style.css';
 import MetaTags from 'react-meta-tags';
-function Xyz() {
+function LandingScreen() {
   const categoryList = useSelector((state) => state.categoryList);
   const { category } = categoryList;
   const productList = useSelector((state) => state.productList);
@@ -146,7 +146,10 @@ function Xyz() {
                     <li key={product._id}>
                       <div className="featured__item__pic set-bg">
                         <Link to={'/product/' + product._id}>
-                          <img src={product.image} alt="product" />
+                          <img
+                            src={`http://localhost:5000/${product.image}`}
+                            alt="product"
+                          />
                         </Link>
                       </div>
                       <div className="featured__item__text">
@@ -170,4 +173,4 @@ function Xyz() {
     </div>
   );
 }
-export default Xyz;
+export default LandingScreen;

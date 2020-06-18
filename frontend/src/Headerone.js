@@ -58,9 +58,6 @@ return(
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" />
 
-     
-
-
         {/* Humberger Begin */}
         <div className="humberger__menu__overlay" />
         <div className="humberger__menu__wrapper">
@@ -86,57 +83,7 @@ return(
               item: <span><Amount/></span>
             </div>
           </div>
-          <div className="humberger__menu__widget">
-            <div className="header__top__right__language">
-              <img src="css/language.png" />
-              <div>English</div>
-              <span className="arrow_carrot-down" />
-              <ul>
-                <li>
-                  <a href="#">Spanis</a>
-                </li>
-                <li>
-                  <a href="#">English</a>
-                </li>
-              </ul>
-            </div>
-            {/* <div className="header__top__right__auth">
-              <a href="#">
-                <i className="fa fa-user" /> Login
-              </a>
-      
-            </div> */}
-            <div className="header__top__right__auth">
-                      <a href="#">
-                        <i className="fa fa-user" /> Login
-                </a>
-                </div>
-                <div className="header__top__right__language">
-              {userInfo ? (
-              <Link to="/profile">{userInfo.name}</Link>
-            ) : (
-              <Link to="/signin">Sign In</Link>
-            )}
-              {userInfo && userInfo.isAdmin && (
-              <div className="header__top__right__language">
-                <a href="#">Admin</a>
-                <span className="arrow_carrot-down" />
-                <ul>
-                  <li>
-                    <Link to="/orders">Orders</Link></li>
-                    <li>
-                    <Link to="/products">Products</Link>
-                    </li>
-                    <li>
-                    <Link to="/categories">Categories</Link>
-                  </li>
-                  </ul>
-              </div>
-            )}
-          
-                </div>
-          </div>
-        
+ 
           <nav className="humberger__menu__nav mobile-menu">
             <ul>
               <li className="active">
@@ -239,33 +186,33 @@ return(
                         </li>
                       </ul>
                     </div>
-                    <div className="header__top__right__auth">
+                    {/* <div className="header__top__right__auth">
                       <a href="#">
                         <i className="fa fa-user" /> Login
                 </a>
-                </div>
+                </div> */}
                 <div className="header__top__right__language">
               {userInfo ? (
               <Link to="/profile">{userInfo.name}</Link>
             ) : (
               <Link to="/signin">Sign In</Link>
             )}
-              {userInfo && userInfo.isAdmin && (
-              <div className="header__top__right__language">
-                <a href="#">Admin</a>
-                <span className="arrow_carrot-down" />
-                <ul>
-                  <li>
-                    <Link to="/orders">Orders</Link></li>
-                    <li>
-                    <Link to="/products">Products</Link>
-                    </li>
-                    <li>
-                    <Link to="/categories">Categories</Link>
-                  </li>
-                  </ul>
-              </div>
-            )}
+            {userInfo && userInfo.isAdmin && (
+   <div className="header__top__right__language">
+     <a href="#">Admin</a>
+     <span className="arrow_carrot-down" />
+     <ul>
+       <li>
+         <Link to="/orders">Orders</Link></li>
+         <li>
+         <Link to="/products">Products</Link>
+         </li>
+         <li>
+         <Link to="/categories">Categories</Link>
+       </li>
+       </ul>
+   </div>
+ )}
             {userInfo && userInfo.isSeller && (
               <div className="header__top__right__language">
                 <a href="#">Seller</a>
@@ -490,3 +437,4 @@ return(
 );
 }
 export default Headerone;
+

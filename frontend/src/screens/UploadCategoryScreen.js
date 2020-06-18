@@ -5,6 +5,7 @@ import {
   listCategory,
   deleteCategory,
 } from '../actions/categoryActions';
+import './css/style.css';
 
 function CategoryScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -62,24 +63,24 @@ function CategoryScreen(props) {
   return (
     <div className="content content-margined">
       <div className="product-header">
-        <h3>Category</h3>
-        <button className="button primary" onClick={() => openModal({})}>
+      <h4 className="signin-title">Category</h4>
+        <button className="btn-primary" onClick={() => openModal({})}>
           Create Category
         </button>
       </div>
       {modalVisible && (
-        <div className="form">
+        <div className="signin__form">
           <form onSubmit={submitHandler}>
-            <ul className="form-container">
-              <li>
-                <h2>Create Category</h2>
-              </li>
-              <li>
+            <div className="form-container">
+              <div>
+              <h4 class="signin__title">Create Category</h4>
+              </div>
+              <div>
                 {loadingSave && <div>Loading...</div>}
                 {errorSave && <div>{errorSave}</div>}
-              </li>
+              </div>
 
-              <li>
+              <div className="signin__input">
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
@@ -88,32 +89,32 @@ function CategoryScreen(props) {
                   id="name"
                   onChange={(e) => setName(e.target.value)}
                 ></input>
-              </li>
+              </div>
 
-              <li>
-                <label htmlFor="description">Description</label>
-                <textarea
+              <div className="signin__input">
+                <label htmlFor="description">Description</label><br></br>
+                <textarea className="destext"
                   name="description"
                   value={description}
                   id="description"
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
-              </li>
-              <li>
-                <button type="submit" className="button primary">
+              </div>
+              
+                <button type="submit" className="site-btn">
                   {id ? 'Update' : 'Create'}
                 </button>
-              </li>
-              <li>
+            
+              
                 <button
                   type="button"
                   onClick={() => setModalVisible(false)}
-                  className="button secondary"
+                  className="back__button"
                 >
                   Back
                 </button>
-              </li>
-            </ul>
+              
+            </div>
           </form>
         </div>
       )}

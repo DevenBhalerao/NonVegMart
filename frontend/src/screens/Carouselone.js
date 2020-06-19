@@ -14,6 +14,8 @@ import './css/nice-select.css';
 import './css/owl.carousel.min.css';
 import './css/slicknav.min.css';
 import './css/style.css';
+import '../slider/css/style.css';
+import '../slider/demo.css';
 import MetaTags from 'react-meta-tags';
 function Xyz() {
   const categoryList = useSelector((state) => state.categoryList);
@@ -33,6 +35,17 @@ function Xyz() {
     <>
       <div>
         <MetaTags>
+        <meta charSet="UTF-8" />
+  <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive CSS Only Carousel Slider Demo</title>
+  <meta
+    name="description"
+    content="Check out this demo to create responsive carousel slider with the help of CSS only. It also support multiple items and images."
+  />
+  <meta name="author" content="Frontendscript" />
+  
+
           <meta charSet="UTF-8" />
           <meta name="description" content="Ogani Template" />
           <meta name="keywords" content="Ogani, unica, creative, html" />
@@ -47,7 +60,8 @@ function Xyz() {
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-        />
+        />{/*Only for demo purpose - no need to add.*/}
+        
         {/* Js Plugins */}
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -61,22 +75,85 @@ function Xyz() {
         <section className="categories">
           <div className="container">
             <div className="row">
-              
-                {category.map((category) => (
-                  <div className="col-lg-3">
-                    <div
-                      className="categories__item set-bg"
-                      style={{
-                        backgroundImage:
-                          "url('https://cdn.britannica.com/s:700x500/17/196817-050-6A15DAC3/vegetables.jpg')",
-                      }}
-                    >
-                      <h5>
-                        <a href="#">{category.name}</a>
-                      </h5>
-                    </div>
-                  </div>
-                ))}
+             
+            <div>
+  
+  <section>
+    <div className="col-rt-12">
+      <div className="demo-container">
+        <div className="carousel">
+          <input
+            defaultChecked="checked"
+            className="carousel__activator"
+            id="carousel-slide-activator-1"
+            name="carousel"
+            type="radio"
+          />
+          <input
+            className="carousel__activator"
+            id="carousel-slide-activator-2"
+            name="carousel"
+            type="radio"
+          />
+          <input
+            className="carousel__activator"
+            id="carousel-slide-activator-3"
+            name="carousel"
+            type="radio"
+          />
+          <div className="carousel__controls">
+            <label
+              className="carousel__control carousel__control--forward"
+              htmlFor="carousel-slide-activator-2"
+            ></label>
+          </div>
+          <div className="carousel__controls">
+            <label
+              className="carousel__control carousel__control--backward"
+              htmlFor="carousel-slide-activator-1"
+            ></label>
+            <label
+              className="carousel__control carousel__control--forward"
+              htmlFor="carousel-slide-activator-3"
+            ></label>
+          </div>
+          <div className="carousel__controls">
+            <label
+              className="carousel__control carousel__control--backward"
+              htmlFor="carousel-slide-activator-2"
+            ></label>
+          </div>
+          <div className="carousel__screen">
+            <div className="carousel__track">
+              <div className="carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3">
+                <div className="demo-content">a</div>
+              </div>
+              <div className="carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3">
+                <div className="demo-content">b</div>
+              </div>
+              <div className="carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3">
+                <div className="demo-content">c</div>
+              </div>
+              <div className="carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3">
+                <div className="demo-content">d</div>
+              </div>
+              <div className="carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3">
+                <div className="demo-content">e</div>
+              </div>
+              <div className="carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3">
+                <div className="demo-content">f</div>
+              </div>
+              <div className="carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3">
+                <div className="demo-content">g</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>;
+
               
             </div>
           </div>

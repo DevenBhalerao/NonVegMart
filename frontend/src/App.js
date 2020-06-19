@@ -17,7 +17,7 @@ import './css/style.css';
 import './index.css';
 
 import MetaTags from 'react-meta-tags';
-import HomeScreen from './screens/HomeScreen1';
+import ShopScreen from './screens/ShopScreen';
 import Checkout from './screens/Checkout';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
@@ -34,7 +34,7 @@ import OrdersScreen from './screens/OrdersScreen';
 import UploadCategoryScreen from './screens/UploadCategoryScreen';
 import CategoryScreen1 from './screens/CategoryScreen1';
 import Headerone from './Headerone';
-import Xyz from './screens/Xyz';
+import LandingScreen from './screens/LandingScreen';
 import ShopDetails from './screens/ShopDetails';
 
 function App() {
@@ -69,8 +69,8 @@ function App() {
           <Route path="/product/:id" component={ProdutScreen} />
           <Route path="/cart/:id?" component={CartScreen} />
           <Route path="/category/:id" component={CategoryScreen1} />
-          <Route path="/shop" component={HomeScreen} />
-          <Route path="/" exact={true} component={Xyz} />
+          <Route path="/shop" component={ShopScreen} />
+          <Route path="/" exact={true} component={LandingScreen} />
         </div>
       </main>
       <div className="row">

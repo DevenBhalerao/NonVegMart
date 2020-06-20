@@ -66,7 +66,11 @@ function Headerone() {
               <div class="col-lg-2">
                 <div class="header__logo">
                   <a href="./index.html">
-                    <img src="img/logo.png" alt="" />
+                    <img
+                      style={{ width: '50%', height: '50%' }}
+                      src={`http://localhost:5000/logo.png`}
+                      alt=""
+                    />
                   </a>
                 </div>
               </div>

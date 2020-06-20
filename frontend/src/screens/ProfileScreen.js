@@ -40,45 +40,42 @@ function ProfileScreen(props) {
 
   return <div className="profile">
     <div className="profile-info">
-      <div className="form">
+      <div className="signin__form">
         <form onSubmit={submitHandler} >
-          <ul className="form-container">
-            <li>
-              <h2>User Profile</h2>
-            </li>
-            <li>
+          <div className="form-container">
+            <div>
+              <h3 className="signin__title">User Profile</h3>
+            </div>
+            <div>
               {loading && <div>Loading...</div>}
               {error && <div>{error}</div>}
               {success && <div>Profile Saved Successfully.</div>}
-            </li>
-            <li>
+            </div>
+            <div className="signin__input">
               <label htmlFor="name">
                 Name
           </label>
               <input value={name} type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}>
               </input>
-            </li>
-            <li>
+            </div>
+            <div className="signin__input">
               <label htmlFor="email">
                 Email
           </label>
               <input value={email} type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>
               </input>
-            </li>
-            <li>
+            </div>
+            <div className="signin__input">
               <label htmlFor="password">Password</label>
               <input value={password} type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}>
               </input>
-            </li>
-
-            <li>
-              <button type="submit" className="button primary">Update</button>
-            </li>
-            <li>
-              <button type="button" onClick={handleLogout} className="button secondary full-width">Logout</button>
-            </li>
-
-          </ul>
+            </div>
+    
+              <button type="submit" className="site-btn">Update</button>
+       
+              <button type="button" onClick={handleLogout} className="back__button3">Logout</button>
+          
+          </div>
         </form>
       </div>
     </div>

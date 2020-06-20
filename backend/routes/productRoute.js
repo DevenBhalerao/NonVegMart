@@ -31,7 +31,9 @@ router.post('/uploadImage', (req, res) => {
   });
 });
 
+
 router.get('/', async (req, res) => {
+  console.log(req.query);
   const category = req.query.category ? { category: req.query.category } : {};
   const searchKeyword = req.query.searchKeyword
     ? {
@@ -53,6 +55,10 @@ router.get('/', async (req, res) => {
   );
   res.send(products);
 });
+
+// router.get('/search' , async(req,res) => {
+//   console.log(reqq.query);
+// }) 
 
 router.get('/:id', async (req, res) => {
   const product = await Product.findOne({ _id: req.params.id });

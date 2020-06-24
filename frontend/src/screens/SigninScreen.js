@@ -7,6 +7,7 @@ import './css/style.css'
 
 function SigninScreen(props) {
   const [email, setEmail] = useState('');
+ 
   const [password, setPassword] = useState('');
   const userSignin = useSelector((state) => state.userSignin);
   const { loading, userInfo, error } = userSignin;
@@ -41,9 +42,7 @@ function SigninScreen(props) {
           <div className="signin__input">
             <p htmlFor="email">Email<span>*</span></p>
             <input
-              type="email"
-              name="email"
-              id="email"
+              
               onChange={(e) => setEmail(e.target.value)}
             ></input>
           </div>

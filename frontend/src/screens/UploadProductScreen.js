@@ -181,15 +181,17 @@ function ProductsScreen(props) {
                   className="cattext"
                   onChange={(e) => dropdown(e.currentTarget)}
                 >
-                  <option key="default" value="default">
+               <option key="default" value="default">
                     Please select a category
                   </option>
-                  {category.map(({ name, _id }) => (
+                 {category.map(({ name, _id }) => (
                     <option key={name} value={_id + '_' + name}>
                       {name}
                     </option>
-                  ))}
-                </select>
+                  ))} 
+             
+           
+                </select> 
               </div>
 
               <div className="signin__input">
@@ -233,7 +235,6 @@ function ProductsScreen(props) {
               <th>ID</th>
               <th>Name</th>
               <th>Price</th>
-
               <th>Category</th>
               <th>Brand</th>
               <th>Action</th>

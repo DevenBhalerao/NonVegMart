@@ -36,6 +36,7 @@ import CategoryScreen1 from './screens/CategoryScreen1';
 import Headerone from './Headerone';
 import LandingScreen from './screens/LandingScreen';
 import ShopDetails from './screens/ShopDetails';
+import uploadSellerProductScreen from './screens/UploadSellerProductScreen'
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -71,6 +72,7 @@ function App() {
           <Route path="/category/:id" component={CategoryScreen1} />
           <Route path="/shop" component={ShopScreen} />
           <Route path="/" exact={true} component={LandingScreen} />
+          <Route path="/sellerproducts" component={uploadSellerProductScreen} />
         </div>
       </main>
       <div className="row">

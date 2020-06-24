@@ -28,6 +28,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import RegisterScreen from './screens/RegisterScreen';
 import Amount from './screens/ShopDetails';
 function Headerone() {
+  const [search , setSearch] = useState('');
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const categoryList = useSelector((state) => state.categoryList);
@@ -65,7 +66,7 @@ function Headerone() {
             <div class="row">
               <div class="col-lg-2">
                 <div class="header__logo">
-                  <a href="./index.html">
+                  <a href="/">
                     <img
                       style={{ width: '50%', height: '50%' }}
                       src={`http://localhost:5000/logo.png`}
@@ -90,7 +91,7 @@ function Headerone() {
                           <a href="./shop-details.html">Shop Details</a>
                         </li>
                         <li>
-                          <a href="./shoping-cart.html">Shoping Cart</a>
+                          <a href="./cart">Shoping Cart</a>
                         </li>
                         <li>
                           <a href="/shipping">Check Out</a>
@@ -120,7 +121,21 @@ function Headerone() {
                             <a href="/orders">Orders</a>
                           </li>
                           <li>
-                            <a href="products">Products</a>
+                            <a href="/products">Products</a>
+                          </li>
+                        </ul>
+                      </li>
+                    )}
+
+                    {userInfo && userInfo.isSeller && (
+                      <li>
+                        <a href="#">Seller</a>
+                        <ul className="header__menu__dropdown">
+                          <li>
+                            <a href="/orders">Orders</a>
+                          </li>
+                          <li>
+                            <a href="/sellerproducts">Products</a>
                           </li>
                         </ul>
                       </li>
@@ -169,9 +184,9 @@ function Headerone() {
                   </div>
                 </div>
                 <div className="hero__search__form">
-                  <form action="#">
-                    <input type="text" placeholder="What do yo u need?" />
-                    <button type="submit" className="site-btn">
+                  <form action="/shop">
+                    <input type="text"  onclick={(e) => setSearch(e.target.value)} name="search" id="search" placeholder="What do you need?" />
+                    <button type="submit"className="site-btn">
                       SEARCH
                     </button>
                   </form>

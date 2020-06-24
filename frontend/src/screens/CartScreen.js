@@ -8,7 +8,7 @@ function CartScreen(props) {
   const cart = useSelector((state) => state.cart);
 
   const { cartItems } = cart;
-
+  console.log(cartItems);
   const productId = props.match.params.id;
   const qty = props.location.search
     ? Number(props.location.search.split('=')[1])
@@ -26,10 +26,6 @@ function CartScreen(props) {
   const checkoutHandler = () => {
     props.history.push('/signin?redirect=shipping');
   };
-
-  function multiply(a, b) {
-    return a * b;
-  }
   return (
     <div className="cart">
       <section class="shoping-cart spad">

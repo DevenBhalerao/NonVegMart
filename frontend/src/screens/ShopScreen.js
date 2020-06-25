@@ -197,10 +197,10 @@ function HomeScreen(props) {
                   <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="product__item">
                       <Link to={'/product/' + product._id}>
-                        <div
-                          class="product__item__pic set-bg"
-                          data-setbg={product.image}
-                        ></div>
+                        <img
+                          src={`http://localhost:5000/${product.image}`}
+                          alt="product"
+                        />
                       </Link>
                       <div class="product__item__text">
                         <h6>

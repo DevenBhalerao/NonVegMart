@@ -6,11 +6,15 @@ import './css/style.css';
 
 function RegisterScreen(props) {
   const [name, setName] = useState('');
+  // console.log(name)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+  const [seller , setSeller] = useState('');
+  console.log(seller)
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, userInfo, error } = userRegister;
+
   const dispatch = useDispatch();
 
   const redirect = props.location.search
@@ -27,7 +31,7 @@ function RegisterScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    dispatch(register(name, email, password , seller));
   };
   return (
     <div className="signin__form">
@@ -77,6 +81,11 @@ function RegisterScreen(props) {
             ></input>
           </div>
           <div>
+          <div>
+            <input type="checkbox" onChange={(e) => setSeller(e.target.value)}></input>
+            <label>Are you a seller?</label>
+          </div>
+          
             <button type="submit" className="site-btn signin__button">
               Register
             </button>

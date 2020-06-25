@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const prodctSchema = new mongoose.Schema({
+  sellerid:{type:mongoose.Types.ObjectId , required:true},
   name: { type: String, required: true },
   image: { type: Array },
   brand: { type: String, required: true },

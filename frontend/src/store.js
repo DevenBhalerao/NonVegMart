@@ -8,6 +8,12 @@ import {
   productDeleteReducer,
 } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
+import{
+  sellerproductListReducer,
+  sellerproductDetailsReducer,
+  sellerproductSaveReducer,
+  sellerproductDeleteReducer
+} from './reducers/sellerProductReducers'
 import {
   userSigninReducer,
   userRegisterReducer,
@@ -54,6 +60,10 @@ const reducer = combineReducers({
   categoryDetails: categoryDetailsReducer,
   categorySave: categorySaveReducer,
   categoryDelete: categoryDeleteReducer,
+  sellerProductList:sellerproductListReducer,
+  sellerProductDetails: sellerproductDetailsReducer,
+  sellerProductSave: sellerproductSaveReducer,
+  sellerProductDelete:sellerproductDeleteReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

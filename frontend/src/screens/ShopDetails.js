@@ -71,7 +71,7 @@ function Amount(props) {
   
             
               
-              <div>${totalPrice}</div>
+              <div>&#8377;{totalPrice}</div>
 
 
 

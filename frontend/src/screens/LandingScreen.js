@@ -31,6 +31,24 @@ function LandingScreen() {
   }, []);
   return (
     <div className="container">
+    
+      <div>
+        <title>Ogani | Template</title>
+        {/* Google Font */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
+        />
+        {/* Js Plugins */}
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/jquery.slicknav.js"></script>
+        <script src="js/mixitup.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/main.js"></script>
+        <div className="container">
       <div
         className="hero__item set_bg"
         style={{
@@ -50,22 +68,7 @@ function LandingScreen() {
           </a>
         </div>
       </div>
-      <div>
-        <title>Ogani | Template</title>
-        {/* Google Font */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-        />
-        {/* Js Plugins */}
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.nice-select.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/jquery.slicknav.js"></script>
-        <script src="js/mixitup.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/main.js"></script>
+</div>
         {/* Categories Section Begin */}
         <section className="categories" style={{ 'margin-top': '45px' }}>
           <div className="container">
@@ -89,7 +92,7 @@ function LandingScreen() {
                   className="categories__item set-bg"
                   style={{
                     backgroundImage:
-                      "url('https://www.publicdomainpictures.net/pictures/60000/velka/seasoned-chicken-legs.jpg')",
+                      "url('https://c.pxhere.com/images/8c/b8/185b5e821f27a5a08b59de9bc60d-1583337.jpg!d')",
                   }}
                 >
                   <h5>
@@ -130,7 +133,7 @@ function LandingScreen() {
         </section>
         {/* Categories Section End */}
         {/* Featured Section Begin */}
-        <section className="featured spad">
+ <section className="featured spad">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
@@ -147,10 +150,27 @@ function LandingScreen() {
                       <div className="featured__item__pic set-bg">
                         <Link to={'/product/' + product._id}>
                           <img
-                            src={`http://localhost:5000/${product.image}`}
+                                             src={`http://localhost:5000/${product.image}`}
                             alt="product"
                           />
                         </Link>
+                        <ul className="featured__item__pic__hover">
+            <li>
+            <a href="#">
+            <i className="fa fa-heart" />
+            </a>
+            </li>
+            <li>
+            <a href="#">
+            <i className="fa fa-retweet" />
+            </a>
+            </li>
+            <li>
+            <Link to ={'/cart/' + product._id}>
+            <i className="fa fa-shopping-cart" />
+            </Link>
+            </li>
+            </ul>
                       </div>
                       <div className="featured__item__text">
                         <h6>
@@ -158,7 +178,7 @@ function LandingScreen() {
                             {product.name}
                           </Link>
                         </h6>
-                        <h5>${product.price}</h5>
+                        <h5>&#8377;{product.price}</h5>
                       </div>
                     </li>
                   </div>

@@ -88,7 +88,7 @@ function PlaceOrderScreen(props) {
                       </div>
                     </div>
                     <div className="cart-price">
-                      ${item.price}
+                      &#8377;{item.price}
                     </div>
                   </li>
                 )
@@ -108,19 +108,19 @@ function PlaceOrderScreen(props) {
           </li>
           <li>
             <div>Items</div>
-            <div>${itemsPrice}</div>
+            <div>&#8377;{itemsPrice}</div>
           </li>
           <li>
             <div>Shipping</div>
-            <div>${shippingPrice}</div>
+            <div>&#8377;{shippingPrice}</div>
           </li>
           <li>
             <div>Tax</div>
-            <div>${taxPrice}</div>
+            <div>&#8377;{taxPrice}</div>
           </li>
           <li>
             <div>Order Total</div>
-            <div>${totalPrice}</div>
+            <div>&#8377;{totalPrice}</div>
           </li>
         </ul>
 

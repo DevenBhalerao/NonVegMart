@@ -77,13 +77,13 @@ function Newcheckpay(props) {
               
                 
               
-             <div> Items<span> <div>${itemsPrice}</div></span></div>
-             <div> Shipping<span> <div>${shippingPrice}</div></span></div>
-             <div> Tax<span> <div> ${taxPrice}</div></span></div>
+             <div> Items<span> <div>&#8377;{itemsPrice}</div></span></div>
+             <div> Shipping<span> <div>&#8377;{shippingPrice}</div></span></div>
+             <div> Tax<span> <div> &#8377;{taxPrice}</div></span></div>
               
 
               <div className="checkout__order__total">
-              Order Total <span><div>${totalPrice}</div></span>
+              Order Total <span><div>&#8377;{totalPrice}</div></span>
               </div>
               
              

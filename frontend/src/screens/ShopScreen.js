@@ -99,7 +99,7 @@ function HomeScreen(props) {
                           </div>
                           <div class="latest-product__item__text">
                             <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
+                            <span>&#8377;30.00</span>
                           </div>
                         </a>
                         <a href="#" class="latest-product__item">
@@ -108,7 +108,7 @@ function HomeScreen(props) {
                           </div>
                           <div class="latest-product__item__text">
                             <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
+                            <span>&#8377;30.00</span>
                           </div>
                         </a>
                         <a href="#" class="latest-product__item">
@@ -117,7 +117,7 @@ function HomeScreen(props) {
                           </div>
                           <div class="latest-product__item__text">
                             <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
+                            <span>&#8377;30.00</span>
                           </div>
                         </a>
                       </div>
@@ -128,7 +128,7 @@ function HomeScreen(props) {
                           </div>
                           <div class="latest-product__item__text">
                             <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
+                            <span>&#8377;30.00</span>
                           </div>
                         </a>
                         <a href="#" class="latest-product__item">
@@ -137,7 +137,7 @@ function HomeScreen(props) {
                           </div>
                           <div class="latest-product__item__text">
                             <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
+                            <span>&#8377;30.00</span>
                           </div>
                         </a>
                         <a href="#" class="latest-product__item">
@@ -146,7 +146,7 @@ function HomeScreen(props) {
                           </div>
                           <div class="latest-product__item__text">
                             <h6>Crab Pool Security</h6>
-                            <span>$30.00</span>
+                            <span>&#8377;30.00</span>
                           </div>
                         </a>
                       </div>
@@ -199,14 +199,17 @@ function HomeScreen(props) {
                       <Link to={'/product/' + product._id}>
                         <div
                           class="product__item__pic set-bg"
-                          data-setbg={product.image}
-                        ></div>
+                          
+                        >
+                          <img src={product.image} alt="product" />
+                        </div>
                       </Link>
+                     
                       <div class="product__item__text">
                         <h6>
                           <a href="/product">{product.name}</a>
                         </h6>
-                        <h5>${product.price}</h5>
+                        <h5>&#8377;{product.price}</h5>
                       </div>
                     </div>
                   </div>

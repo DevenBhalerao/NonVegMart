@@ -28,6 +28,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import RegisterScreen from './screens/RegisterScreen';
 import Amount from './screens/ShopDetails';
 function Headerone() {
+  const [search , setSearch] = useState('');
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const categoryList = useSelector((state) => state.categoryList);
@@ -200,9 +201,9 @@ function Headerone() {
       <div className="row">
       <div class="col-lg-3">
                 <div class="header__logo">
-                  <a href="./index.html">
+                  <a href="/">
                     <img
-                      style={{ width: '27%', height: '27%' }}
+                      style={{ width: '50%', height: '50%' }}
                       src={`http://localhost:5000/logo.png`}
                       alt=""
                     />
@@ -225,7 +226,7 @@ function Headerone() {
                           <a href="./shop-details.html">Shop Details</a>
                         </li>
                         <li>
-                          <a href="./shoping-cart.html">Shoping Cart</a>
+                          <a href="./cart">Shoping Cart</a>
                         </li>
                         <li>
                           <a href="/shipping">Check Out</a>
@@ -255,7 +256,21 @@ function Headerone() {
                             <a href="/orders">Orders</a>
                           </li>
                           <li>
-                            <a href="products">Products</a>
+                            <a href="/products">Products</a>
+                          </li>
+                        </ul>
+                      </li>
+                    )}
+
+                    {userInfo && userInfo.isSeller && (
+                      <li>
+                        <a href="#">Seller</a>
+                        <ul className="header__menu__dropdown">
+                          <li>
+                            <a href="/orders">Orders</a>
+                          </li>
+                          <li>
+                            <a href="/sellerproducts">Products</a>
                           </li>
                         </ul>
                       </li>

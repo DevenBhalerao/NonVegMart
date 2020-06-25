@@ -207,7 +207,7 @@ function HomeScreen(props) {
                      
                       <div class="product__item__text">
                         <h6>
-                          <a href="/product">{product.name}</a>
+                          <Link to = {'/product/' + product._id}>{product.name}</Link>
                         </h6>
                         <h5>&#8377;{product.price}</h5>
                       </div>

@@ -37,6 +37,8 @@ import Headerone from './Headerone';
 import LandingScreen from './screens/LandingScreen';
 import ShopDetails from './screens/ShopDetails';
 import Contact from './screens/Contact';
+import uploadSellerProductScreen from './screens/UploadSellerProductScreen'
+
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -72,6 +74,7 @@ function App() {
           <Route path="/contact" component={Contact} />
           <Route path="/shop" component={ShopScreen} />
           <Route path="/" exact={true} component={LandingScreen} />
+          <Route path="/sellerproducts" component={uploadSellerProductScreen} />
         </div>
       </main>
       <div className="row">

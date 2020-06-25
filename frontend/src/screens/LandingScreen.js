@@ -62,7 +62,7 @@ function LandingScreen() {
             MEAT AND POULTRY <br />
             100% Fresh
           </h2>
-          <p>Free Pickup and Delivery Available</p>
+          <p style={{ color: 'white' }}>Free Pickup and Delivery Available</p>
           <a href="/shop" className="primary-btn">
             SHOP NOW
           </a>
@@ -146,7 +146,7 @@ function LandingScreen() {
               {products.map((product) => (
                 <div className="col-lg-3 col-md-4 col-sm-6 mix ">
                   <div className="featured__item">
-                    <li key={product._id}>
+                    <li style={{ 'list-style-type': 'none' }} key={product._id}>
                       <div className="featured__item__pic set-bg">
                         <Link to={'/product/' + product._id}>
                           <img

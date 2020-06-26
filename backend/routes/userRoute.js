@@ -36,8 +36,8 @@ router.post('/signin', async (req, res) => {
       name: signinUser.name,
       email: signinUser.email,
       isAdmin: signinUser.isAdmin,
-      isSeller:signinUser.isSeller,
-      isDeliveryPerson:signinUser.isDeliveryPerson,
+      isSeller: signinUser.isSeller,
+      isDeliveryPerson: signinUser.isDeliveryPerson,
       token: getToken(signinUser),
     });
   } else {
@@ -46,9 +46,9 @@ router.post('/signin', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  if(req.body.seller === 'on'){
+  if (req.body.seller === 'on') {
     req.body.seller = true;
-  }else{
+  } else {
     req.body.seller = false;
   }
   const user = new User({
@@ -64,15 +64,12 @@ router.post('/register', async (req, res) => {
       name: newUser.name,
       email: newUser.email,
       isAdmin: newUser.isAdmin,
-      isSeller:newUser.isSeller,
-      isDeliveryPerson:newUser.isDeliveryPerson,
+      isSeller: newUser.isSeller,
+      isDeliveryPerson: newUser.isDeliveryPerson,
       token: getToken(newUser),
     });
-    if(isSeller === true){
-      _sellerid = _id
-    }
-    newUser = await user.save();
-    console.log(newUser);
+
+    //console.log(newUser);
   } else {
     res.status(401).send({ msg: 'Invalid User Data.' });
   }
@@ -93,34 +90,34 @@ router.get('/createadmin', async (req, res) => {
   }
 });
 
-router.get('/seller' , async(req,res) =>{
-  try{
+router.get('/seller', async (req, res) => {
+  try {
     const user = new User({
-      name:'abc',
-      email:'abc@example.com',
-      password:'1111',
-      isSeller:true,
+      name: 'abc',
+      email: 'abc@example.com',
+      password: '1111',
+      isSeller: true,
     });
     const newUser = await user.save();
     res.send(newUser);
-  }catch(error){
-    res.send({msg:error.message});
+  } catch (error) {
+    res.send({ msg: error.message });
   }
 })
 
-router.get('/delivery-person' , async(req,res) =>{
-  try{
+router.get('/delivery-person', async (req, res) => {
+  try {
     const user = new User({
-      name:'def',
-      email:'def@example.com',
-      password:'0000',
-      isDeliveryPerson:true
+      name: 'def',
+      email: 'def@example.com',
+      password: '0000',
+      isDeliveryPerson: true
 
     });
     const newUser = await user.save();
     res.send(newUser);
-  }catch(error){
-    res.send({msg:error.message});
+  } catch (error) {
+    res.send({ msg: error.message });
   }
 })
 

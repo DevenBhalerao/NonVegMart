@@ -162,7 +162,9 @@ function Headerone() {
         </div>
       </div>
       {/* Humberger End */}
-      <header className="header">
+      <header className="header" style={{
+        'background-color': '#f5f5f5',
+      }} >
         <div className="header__top">
           <div className="container">
             <div className="row">
@@ -199,103 +201,126 @@ function Headerone() {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container" style={{ 'background-color': '#f5f5f5' }}>
           <div className="row">
             <div style={{ 'text-align': 'center' }} class="col-lg-2">
               <div style={{ 'display': 'inline-block' }} class="header__logo">
                 <a href="/">
                   <img
-                    style={{ width: '50%', height: '50%' }}
+                    style={{ width: '60%', height: '60%' }}
                     src={`http://localhost:5000/logo.png`}
                     alt=""
                   />
                 </a>
               </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-7">
               <nav class="header__menu">
-                <ul>
-                  <li class="active">
-                    <a href="/">Home</a>
-                  </li>
-                  <li>
-                    <a href="/shop">Shop</a>
-                  </li>
-                  <li>
-                    <a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                      <li>
-                        <a href="./shop-details.html">Shop Details</a>
-                      </li>
-                      <li>
-                        <a href="./cart">Shoping Cart</a>
-                      </li>
-                      <li>
-                        <a href="/shipping">Check Out</a>
-                      </li>
-                    </ul>
-                  </li>
+                <div className="row">
 
-                  <li>
-                    <a href="/contact">Contact</a>
-                  </li>
+                  <div className="col-lg-12">
+                    <div className="hero__search">
+                      <div className="hero__search__form">
+                        <form action="#">
+                          <div className="hero__search__categories">
+                            All Categories
+                           <span className="arrow_carrot-down" />
+                          </div>
+                          <input type="text" placeholder="What do yo u need?" />
+                          <button type="submit" className="site-btn">
+                            SEARCH
+                               </button>
+                        </form>
+                      </div>
 
-                  {userInfo ? (
+                    </div>
+
+
+
+                  </div>
+                </div>
+
+
+
+
+              </nav>
+            </div>
+            <div class="col-lg-2 " style={{
+
+              'justify-content': 'center',
+
+            }}>
+
+              {!userInfo && (
+
+                <li class="redhover" style={{
+                  'list-style-type': 'none', 'font-size': '16px', 'font-family': 'Segoe UI', 'padding': '24px 00px', 'margin-left': '50px',
+                  'max-width': '50%',
+                }}>
+
+                  <a href="/signin" style={{ 'font-size': '16px', 'font-family': 'Segoe UI', 'color': '#1c1c1c' }} ><img src={`http://localhost:5000/login.svg`} style={{
+                    'display': 'block',
+                    'max-width': '40%',
+                    'height': 'auto',
+                  }} />Sign In</a>
+
+
+                </li>
+
+              )
+
+              }
+
+              {userInfo && userInfo.isAdmin && (
+                <li>
+                  <a href="#">Admin</a>
+                  <ul className="header__menu__dropdown">
                     <li>
                       <a href="/profile">My account</a>
                     </li>
-                  ) : (
-                      <li>
-                        <a href="/signin">Sign In</a>
-                      </li>
-                    )}
-
-                  {userInfo && userInfo.isAdmin && (
                     <li>
-                      <a href="#">Admin</a>
-                      <ul className="header__menu__dropdown">
-                        <li>
-                          <a href="/orders">Orders</a>
-                        </li>
-                        <li>
-                          <a href="/products">Products</a>
-                        </li>
-                      </ul>
+                      <a href="/orders">Orders</a>
                     </li>
-                  )}
-
-                  {userInfo && userInfo.isSeller && (
                     <li>
-                      <a href="#">Seller</a>
-                      <ul className="header__menu__dropdown">
-                        <li>
-                          <a href="/orders">Orders</a>
-                        </li>
-                        <li>
-                          <a href="/sellerproducts">Products</a>
-                        </li>
-                      </ul>
+                      <a href="/products">Products</a>
                     </li>
-                  )}
+                  </ul>
+                </li>
+              )}
 
-                </ul>
-              </nav>
+              {userInfo && userInfo.isSeller && (
+                <li>
+                  <a href="#">Seller</a>
+                  <ul className="header__menu__dropdown">
+                    <li>
+                      <a href="/profile">My account</a>
+                    </li>
+                    <li>
+                      <a href="/orders">Orders</a>
+                    </li>
+                    <li>
+                      <a href="/sellerproducts">Products</a>
+                    </li>
+                  </ul>
+                </li>
+              )}
+
             </div>
 
-
-
-            <div className="col-lg-1">
+            <div class="col-lg-1">
               <div className="header__cart">
                 <ul>
                   <li>
                     <a href="#">
-                      <i className="fa fa-shopping-bag" /> <span>0</span>
+                      <img src={`http://localhost:5000/cart.png`} style={{
+                        'display': 'block',
+                        'max-width': '100%',
+                        'height': 'auto',
+                      }} />
                     </a>
                   </li>
                 </ul>
-                <div className="header__cart__price">
-                  Item: <span><Amount /></span>
-                </div>
+
               </div>
             </div>
           </div>
@@ -304,46 +329,12 @@ function Headerone() {
             <i className="fa fa-bars" />
           </div>
         </div>
-      </header>
+      </header >
       {/*Header Section End */}
       {/* Hero Section Begin */}
-      <section className="hero">
-        <div className="container">
-          <div className="row">
 
-            <div className="col-lg-12">
-              <div className="hero__search">
-                <div className="hero__search__form">
-                  <form action="#">
-                    <div className="hero__search__categories">
-                      All Categories
-                  <span className="arrow_carrot-down" />
-                    </div>
-                    <input type="text" placeholder="What do yo u need?" />
-                    <button type="submit" className="site-btn">
-                      SEARCH
-                </button>
-                  </form>
-                </div>
-                <div class="float-right" className="hero__search__phone">
-                  <div className="hero__search__phone__icon">
-                    <i className="fa fa-phone" />
-                  </div>
-                  <div className="hero__search__phone__text">
-                    <h5>+65 11.188.888</h5>
-                    <span>support 24/7 time</span>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        </div>
-      </section>
       {/* Hero Section End */}
-    </div>
+    </div >
   );
 }
 export default Headerone;

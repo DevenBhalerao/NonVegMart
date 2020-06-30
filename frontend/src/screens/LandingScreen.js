@@ -4,6 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+  CarouselCaption
+} from 'reactstrap';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listCategory } from '../actions/categoryActions';
@@ -16,11 +24,75 @@ import './css/slicknav.min.css';
 import './css/style.css';
 import MetaTags from 'react-meta-tags';
 function LandingScreen() {
+
+  const items = [
+    {
+      src:
+        'http://localhost:5000/chicken-carousel.gif'
+      ,
+
+    },
+    {
+      src:
+        'http://localhost:5000/fish-carousel.jpg'
+      ,
+
+    },
+    {
+      src: 'http://localhost:5000/mutton-carousel.jpg',
+
+    },
+    {
+      src: 'http://localhost:5000/ready-carousel.gif',
+
+    },
+    {
+      src: 'http://localhost:5000/coldcut-carousel.gif',
+
+    }
+
+  ];
+
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  const next = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(nextIndex);
+  }
+
+  const previous = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    setActiveIndex(nextIndex);
+  }
+
+  const goToIndex = (newIndex) => {
+    if (animating) return;
+    setActiveIndex(newIndex);
+  }
+
+  const slides = items.map((item) => {
+    return (
+      <CarouselItem
+        onExiting={() => setAnimating(true)}
+        onExited={() => setAnimating(false)}
+        key={item.src}
+      >
+        <img src={item.src} alt={item.altText} />
+        <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+      </CarouselItem>
+    );
+  });
+
   const categoryList = useSelector((state) => state.categoryList);
   const { category } = categoryList;
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(listCategory());
     dispatch(listProducts(category));
@@ -30,8 +102,8 @@ function LandingScreen() {
     };
   }, []);
   return (
-    <div className="container">
-    
+    <div>
+
       <div>
         <title>Ogani | Template</title>
         {/* Google Font */}
@@ -48,31 +120,34 @@ function LandingScreen() {
         <script src="js/mixitup.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
-        <div className="container">
-      <div
-        className="hero__item set_bg"
-        style={{
-          backgroundImage:
-            "url('https://p0.pikrepo.com/preview/635/800/closeup-photo-of-variety-of-meat-products.jpg')",
-        }}
-      >
-        <div className="hero__text">
-          <span style={{ color: 'white' }}>FRESH PRODUCTS</span>
-          <h2 style={{ color: 'white' }}>
-            MEAT AND POULTRY <br />
-            100% Fresh
-          </h2>
-          <p style={{ color: 'white' }}>Free Pickup and Delivery Available</p>
-          <a href="/shop" className="primary-btn">
-            SHOP NOW
-          </a>
+
+
+        <div style={{ 'width': '100%' }}>
+          <Carousel
+            activeIndex={activeIndex}
+            next={next}
+            previous={previous}
+            style={{ 'width': '100%', 'height': '100%' }}
+
+          >
+            <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+            {slides}
+            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+          </Carousel>
         </div>
-      </div>
-</div>
         {/* Categories Section Begin */}
-        <section className="categories" style={{ 'margin-top': '45px' }}>
+        <section className="categories" style={{ 'background-color': '#DC3023' }}>
           <div className="container">
-            <div className="row ">
+
+
+
+            <div className="row " style={{ 'padding-top': '35px' }}>
+              <div className="col-lg-12">
+                <div className="section-title">
+                  <h2 style={{ 'color': 'white' }} >Explore by Category</h2>
+                </div>
+              </div>
               <div className="col-lg-3">
                 <div
                   className="categories__item set-bg"
@@ -92,7 +167,7 @@ function LandingScreen() {
                   className="categories__item set-bg"
                   style={{
                     backgroundImage:
-                      "url('https://c.pxhere.com/images/8c/b8/185b5e821f27a5a08b59de9bc60d-1583337.jpg!d')",
+                      "url('https://c2.peakpx.com/wallpaper/187/885/219/salted-peppered-chicken-legs-wallpaper-preview.jpg')",
                   }}
                 >
                   <h5>
@@ -128,12 +203,51 @@ function LandingScreen() {
                   </h5>
                 </div>
               </div>
+
+
+
+
+            </div>
+
+            <div className="row" style={{ 'padding-top': '1%', 'justify-content': 'center', 'align-items': 'center', 'padding-bottom': '35px' }}>
+
+              <div className="col-lg-3">
+                <div
+                  className="categories__item set-bg"
+                  style={{
+                    backgroundImage:
+                      "url('https://c1.peakpx.com/wallpaper/134/271/707/catering-bread-appetite-calories-wallpaper-preview.jpg')",
+                  }}
+                >
+                  <h5>
+                    <a href="#">Kebabs</a>
+                  </h5>
+                </div>
+              </div>
+
+
+              <div className="col-lg-3">
+                <div
+                  className="categories__item set-bg"
+                  style={{
+                    backgroundImage:
+                      "url('https://cdn.pixabay.com/photo/2015/03/11/13/21/wurstplatte-668676_1280.jpg')",
+                  }}
+                >
+                  <h5>
+                    <a href="#">Cold Cuts</a>
+                  </h5>
+                </div>
+              </div>
+
+
+
             </div>
           </div>
         </section>
         {/* Categories Section End */}
         {/* Featured Section Begin */}
- <section className="featured spad">
+        <section className="featured spad">
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
@@ -150,27 +264,27 @@ function LandingScreen() {
                       <div className="featured__item__pic set-bg">
                         <Link to={'/product/' + product._id}>
                           <img
-                                             src={`http://localhost:5000/${product.image}`}
+                            src={`http://localhost:5000/${product.image}`}
                             alt="product"
                           />
                         </Link>
                         <ul className="featured__item__pic__hover">
-            <li>
-            <a href="#">
-            <i className="fa fa-heart" />
-            </a>
-            </li>
-            <li>
-            <a href="#">
-            <i className="fa fa-retweet" />
-            </a>
-            </li>
-            <li>
-            <Link to ={'/cart/' + product._id}>
-            <i className="fa fa-shopping-cart" />
-            </Link>
-            </li>
-            </ul>
+                          <li>
+                            <a href="#">
+                              <i className="fa fa-heart" />
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i className="fa fa-retweet" />
+                            </a>
+                          </li>
+                          <li>
+                            <Link to={'/cart/' + product._id}>
+                              <i className="fa fa-shopping-cart" />
+                            </Link>
+                          </li>
+                        </ul>
                       </div>
                       <div className="featured__item__text">
                         <h6>
@@ -189,8 +303,27 @@ function LandingScreen() {
         </section>
         {/* Featured Section End */}
         {/* Latest Product Section Begin */}
+
+        <div class="banner" style={{ 'background-color': '#DC3023', 'padding-bottom': '5%', 'padding-top': '5%' }} >
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="banner__pic">
+                  <img src={`http://localhost:5000/poster1.jpg`} alt="" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="banner__pic">
+                  <img src={`http://localhost:5000/poster2.jpg`} alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </div >
   );
 }
+
 export default LandingScreen;

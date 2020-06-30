@@ -768,11 +768,23 @@ ol {
 /*---------------------
   Categories
 -----------------------*/
+.bgimage {
 
+	
+}
 .categories__item {
 	height: 270px;
 	position: relative;
+	transition: transform .2s;
+	border-radius: 25px;
 }
+
+.categories__item:hover {
+	transform: scale(1.08);
+	border-radius: 20px; /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  
 
 .categories__item h5 {
 	position: absolute;

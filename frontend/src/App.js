@@ -87,7 +87,7 @@ function App() {
                   <div className="footer__about">
                     <div className="footer__about__logo">
                       <a href="./index.html">
-                        <img src="img/logo.png" />
+                        <img style={{ 'height': '50%', 'width': '50%' }} src={`http://localhost:5000/logo.png`} />
                       </a>
                     </div>
                     <ul>

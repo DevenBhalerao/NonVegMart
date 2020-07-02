@@ -3,7 +3,7 @@ import './css/jquery-ui.min.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import axios from 'axios';
-
+import Cookie from 'js-cookie';
 import './App.css';
 
 import './css/elegant-icons.css';
@@ -42,7 +42,25 @@ function Headerone() {
   const closeMenu = () => {
     document.querySelector('.sidebar').classList.remove('open');
   };
-
+  let latitude,longitude;
+  function geolocation(e){
+    e.preventDefault();
+    if("geolocation" in navigator){
+     
+      navigator.geolocation.getCurrentPosition((p,e) => {
+        if(e){
+          alert("There is an error!")
+        }else{
+          latitude = p.coords.latitude;
+          longitude = p.coords.longitude;
+          Cookie.set(latitude , longitude);
+          // location = latitude + longitude;
+          console.log(`latitude = ${latitude}` , `longitude = ${longitude}`);
+        }
+      })
+    }
+    
+  }
   return (
     <div>
       <MetaTags>
@@ -222,11 +240,15 @@ function Headerone() {
                     <div className="hero__search">
                       <div className="hero__search__form">
                         <form action="#">
-                          <div className="hero__search__categories">
-                            All Categories
-                           <span className="arrow_carrot-down" />
-                          </div>
-                          <input type="text" placeholder="What do yo u need?" />
+                        { !geolocation/*latitude && longitude*/ ?(
+                    
+                         <li> Mumbai </li>
+                 
+                        ):(
+                          <a href ='javascript:void(0)' onClick={geolocation} > <i className="fa fa-location-arrow" />Detect Location</a>
+                        )
+                        }
+                          <input type="text" placeholder="What do you need?" />
                           <button type="submit" className="site-btn">
                             SEARCH
                                </button>

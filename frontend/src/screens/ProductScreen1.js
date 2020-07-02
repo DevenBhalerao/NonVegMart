@@ -65,9 +65,9 @@ function ProductScreen(props) {
                       ></img>
                     </div>
 
-                    <img
-                      data-imgbigurl="img/product/details/product-details-2.jpg"
-                      src="img/product/details/thumb-1.jpg"
+                    {/* <img
+                      data-imgbigurl={"img/product/details/product-details-2.jpg"}
+                      src={"img/product/details/thumb-1.jpg"}
                       alt
                     />
                     <img
@@ -84,12 +84,53 @@ function ProductScreen(props) {
                       data-imgbigurl="img/product/details/product-details-4.jpg"
                       src="img/product/details/thumb-4.jpg"
                       alt
-                    />
+                    /> */}
+                  <div className="Avail">
+                    <ul>
+                      <li>
+                        <b>
+                          Availability:
+                          {product.countInStock > 0
+                            ? <span id="instock">In Stock</span>
+                            : <span id="unavailable">Unavailable.' </span>}
+                        </b>
+                      </li>
+                      <li>
+                        <b>Shipping:</b>
+                        <span id="shipping">
+                          01 day shipping. <samp>Free pickup today</samp>
+                        </span>
+                      </li>
+                      <li>
+                        <b>Weight:</b> <span id="weight">0.5 kg</span>
+                      </li>
+                      <li>
+                        <b>Share on</b><br></br>
+                        <div className="share">
+                          <a href="#">
+                            <i className="fa fa-facebook" />
+                          </a>
+                          <a href="#">
+                            <i className="fa fa-twitter" />
+                          </a>
+                          <a href="#">
+                            <i className="fa fa-instagram" />
+                          </a>
+                          <a href="#">
+                            <i className="fa fa-pinterest" />
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6">
                   <div className="product__details__text">
-                    <h3>Name: {product.name}</h3>
+                    <h3>{product.name}</h3>
+                    <div className="product__details__price">
+                      Price: <b>&#8377;{product.price}</b>
+                    </div>
                     <div className="product__details__rating">
                       <i className="fa fa-star" />
                       <i className="fa fa-star" />
@@ -98,13 +139,11 @@ function ProductScreen(props) {
                       <i className="fa fa-star-half-o" />
                       <span>(18 reviews)</span>
                     </div>
-                    <div className="product__details__price">
-                      Price: <b>&#8377;{product.price}</b>
-                    </div>
+                    
                     <p>{product.description}</p>
                     <div className="product__details__quantity">
                       <div className="quantity">
-                        <div className="pro-qty qtybtn">
+                        <div className="pro-qty ">
                           Qty:{' '}
                           <select
                             value={qty}
@@ -123,52 +162,18 @@ function ProductScreen(props) {
                         </div>
                       </div>
                     </div>
-
+                    <a href="#" className="heart-icon">
+                      <span className="icon_heart_alt" />
+                    </a>
+                  
                     {product.countInStock > 0 && (
-                      <button onClick={handleAddToCart} className="primary-btn">
+                      <button onClick={handleAddToCart} className="addToCartButton">
                         Add to Cart
                       </button>
                     )}
 
-                    <a href="#" className="heart-icon">
-                      <span className="icon_heart_alt" />
-                    </a>
-                    <ul>
-                      <li>
-                        <b>
-                          Availability:
-                          {product.countInStock > 0
-                            ? 'In Stock'
-                            : 'Unavailable.'}
-                        </b>
-                      </li>
-                      <li>
-                        <b>Shipping</b>{' '}
-                        <span>
-                          01 day shipping. <samp>Free pickup today</samp>
-                        </span>
-                      </li>
-                      <li>
-                        <b>Weight</b> <span>0.5 kg</span>
-                      </li>
-                      <li>
-                        <b>Share on</b>
-                        <div className="share">
-                          <a href="#">
-                            <i className="fa fa-facebook" />
-                          </a>
-                          <a href="#">
-                            <i className="fa fa-twitter" />
-                          </a>
-                          <a href="#">
-                            <i className="fa fa-instagram" />
-                          </a>
-                          <a href="#">
-                            <i className="fa fa-pinterest" />
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
+                    
+                  
                   </div>
                 </div>
                 <div className="col-lg-12">

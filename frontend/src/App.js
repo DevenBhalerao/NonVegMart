@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'jquery-ui-dist/jquery-ui.min.css';
 import './css/jquery-ui.min.css';
 import './App.css';
+import './PrivacyPolicy'
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
@@ -16,6 +17,10 @@ import './css/slicknav.min.css';
 import './css/style.css';
 import './index.css';
 
+
+import refund from './refundandreturn'
+import privacyPolicy from './PrivacyPolicy'
+import aboutUs from './about-us';
 import MetaTags from 'react-meta-tags';
 import ShopScreen from './screens/ShopScreen';
 import Checkout from './screens/Checkout';
@@ -75,6 +80,9 @@ function App() {
           <Route path="/shop" component={ShopScreen} />
           <Route path="/" exact={true} component={LandingScreen} />
           <Route path="/sellerproducts" component={uploadSellerProductScreen} />
+          <Route path="/privacy-policy" component={privacyPolicy}/>
+          <Route path="/about-us" component={aboutUs}/>
+          <Route path="/return-refund" component={refund}></Route>
         </div>
       </main>
       <div className="row">
@@ -102,7 +110,7 @@ function App() {
                     <h6>Useful Links</h6>
                     <ul>
                       <li>
-                        <a href="#">About Us</a>
+                        <a href="/about-us">About Us</a>
                       </li>
                       <li>
                         <a href="#">About Our Shop</a>
@@ -114,10 +122,13 @@ function App() {
                         <a href="#">Delivery infomation</a>
                       </li>
                       <li>
-                        <a href="#">Privacy Policy</a>
+                        <a href="/privacy-policy">Privacy Policy</a>
                       </li>
                       <li>
                         <a href="#">Our Sitemap</a>
+                      </li>
+                      <li>
+                        <a href="/return-refund"> Return and Refund</a>
                       </li>
                     </ul>
                     <ul>

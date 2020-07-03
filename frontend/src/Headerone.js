@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import axios from 'axios';
 import Cookie from 'js-cookie';
+// import {createHashHistory} from "history";
+import {useHistory} from 'react-router-dom';
 import './App.css';
 
 import './css/elegant-icons.css';
@@ -35,12 +37,16 @@ function Headerone() {
   const { userInfo } = userSignin;
   const categoryList = useSelector((state) => state.categoryList);
   const { loading, category, error } = categoryList;
-
+  const history = useHistory();
   const openMenu = () => {
     document.querySelector('.sidebar').classList.add('open');
   };
   const closeMenu = () => {
     document.querySelector('.sidebar').classList.remove('open');
+  };
+  // console.log(history)
+  const searchHandler = ()=>{
+    history.push('/shop/?search=' +search)
   };
   let latitude,longitude;
   function geolocation(e){
@@ -239,7 +245,7 @@ function Headerone() {
                   <div className="col-lg-12">
                     <div className="hero__search">
                       <div className="hero__search__form">
-                        <form action="#">
+                        
                         { !geolocation/*latitude && longitude*/ ?(
                     
                          <li> Mumbai </li>
@@ -248,11 +254,11 @@ function Headerone() {
                           <a href ='javascript:void(0)' onClick={geolocation} > <i className="fa fa-location-arrow" />Detect Location</a>
                         )
                         }
-                          <input type="text" placeholder="What do you need?" />
-                          <button type="submit" className="site-btn">
+                          <input type="text" placeholder="What do you need?" onChange = {e => setSearch(e.target.value)}/>
+                          <button type="submit" className="site-btn" onClick={searchHandler}>
                             SEARCH
-                               </button>
-                        </form>
+                          </button>
+                       
                       </div>
 
                     </div>

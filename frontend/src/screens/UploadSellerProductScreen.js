@@ -25,7 +25,7 @@ function SellerProductsScreen(props) {
   const sellerProductList = useSelector(state => state.sellerProductList);
 
   const { loading, products, error } = sellerProductList;
-  console.log(products);
+  // console.log(products);
   const categoryList = useSelector((state) => state.categoryList);
 
   const { category } = categoryList;

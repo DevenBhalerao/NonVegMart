@@ -18,24 +18,30 @@ import './css/slicknav.min.css';
 import './css/style.css';
 
 function HomeScreen(props) {
-  const [searchKeyword, setSearchKeyword] = useState('');
+  let [searchKeyword, setSearchKeyword] = useState('');
+  searchKeyword = props.location.search
+    ? (props.location.search.split('=')[1])
+    : " ";
+  console.log(searchKeyword)
+  
   const [sortOrder, setSortOrder] = useState('');
-  const category = props.match.params.id ? props.match.params.id : '';
+  let category = props.match.params.id ? props.match.params.id : '';
+  // category = searchKeyword;
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProducts(category));
+    dispatch(listProducts(category, searchKeyword));
     dispatch(listCategory(category));
     return () => {
       //
     };
   }, [category]);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(listProducts(category, searchKeyword, sortOrder));
-  };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(listProducts(category, searchKeyword, sortOrder));
+  // };
   const sortHandler = (e) => {
     setSortOrder(e.target.value);
     dispatch(listProducts(category, searchKeyword, sortOrder));
@@ -168,7 +174,7 @@ function HomeScreen(props) {
                       </select>
                     </div>
                   </div>
-                  <ul className="filter">
+                  {/* <ul className="filter">
                     <li>
                       <form onSubmit={submitHandler}>
                         <input
@@ -178,7 +184,7 @@ function HomeScreen(props) {
                         <button type="submit">Search</button>
                       </form>
                     </li>
-                  </ul>
+                  </ul> */}
                   {/* <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
                                     <h6><span>16</span> Products found</h6>

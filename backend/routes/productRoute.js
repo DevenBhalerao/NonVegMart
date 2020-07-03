@@ -35,8 +35,7 @@ router.post('/uploadImage', (req, res) => {
 router.get('/', async (req, res) => {
 
   const category = req.query.category ? { category: req.query.category } : {};
-  const searchKeyword = req.query.searchKeyword
-    ? {
+  const searchKeyword = req.query.searchKeyword ? {
       name: {
         $regex: req.query.searchKeyword,
         $options: 'i',
@@ -53,6 +52,7 @@ router.get('/', async (req, res) => {
     // eslint-disable-next-line comma-dangle
     sortOrder
   );
+  console.log(products)
   res.send(products);
 });
 

@@ -6,11 +6,13 @@ import axios from 'axios';
 import Axios from "axios";
 
 const listProducts = (category = '', searchKeyword = '', sortOrder = '') => async (dispatch) => {
+  console.log(searchKeyword);
   try {
 
     dispatch({ type: PRODUCT_LIST_REQUEST });
     const { data } = await axios.get("/api/products?category=" + category +
       "&searchKeyword=" + searchKeyword + "&sortOrder=" + sortOrder);
+    console.log(data);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   }
   catch (error) {

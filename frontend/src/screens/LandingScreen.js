@@ -157,7 +157,7 @@ function LandingScreen() {
                   }}
                 >
                   <h5>
-                    <a href="#">Fish</a>
+                    <a href="/shop/search?=fish">Fish</a>
                   </h5>
                 </div>
               </div>

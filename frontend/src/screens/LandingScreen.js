@@ -157,7 +157,7 @@ function LandingScreen() {
                   }}
                 >
                   <h5>
-                    <a href="/shop/search?=fish">Fish</a>
+                    <a href="/shop/searchCategory?=Fish">Fish</a>
                   </h5>
                 </div>
               </div>
@@ -171,7 +171,7 @@ function LandingScreen() {
                   }}
                 >
                   <h5>
-                    <a href="#">Chicken</a>
+                    <a href="/shop/searchCategory?=chicken">Chicken</a>
                   </h5>
                 </div>
               </div>
@@ -185,7 +185,7 @@ function LandingScreen() {
                   }}
                 >
                   <h5>
-                    <a href="#">Mutton</a>
+                    <a href="/shop/searchCategory?=Mutton">Mutton</a>
                   </h5>
                 </div>
               </div>
@@ -199,7 +199,7 @@ function LandingScreen() {
                   }}
                 >
                   <h5>
-                    <a href="#">Eggs</a>
+                    <a href="/shop/searchCategory?=Eggs">Eggs</a>
                   </h5>
                 </div>
               </div>

@@ -35,6 +35,7 @@ router.post('/uploadImage', (req, res) => {
 router.get('/', async (req, res) => {
 
   const category = req.query.category ? { category: req.query.category } : {};
+  console.log(category)
   const searchKeyword = req.query.searchKeyword ? {
       name: {
         $regex: req.query.searchKeyword,
@@ -52,7 +53,6 @@ router.get('/', async (req, res) => {
     // eslint-disable-next-line comma-dangle
     sortOrder
   );
-  console.log(products)
   res.send(products);
 });
 
@@ -63,7 +63,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const product = await Product.findOne({ _id: req.params.id });
   if (product) {
+    
     res.send(product);
+
   } else {
     res.status(404).send({ message: 'Product Not Found.' });
   }

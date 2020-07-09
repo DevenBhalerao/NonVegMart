@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../actions/userActions';
 import './css/style.css';
@@ -34,6 +35,7 @@ function RegisterScreen(props) {
     dispatch(register(name, email, password , seller));
   };
   return (
+    <Modal  isOpen={true} onRequestClose={false}>
     <div className="signin__form">
       <form onSubmit={submitHandler}>
         <div className="form-container">
@@ -102,6 +104,7 @@ function RegisterScreen(props) {
         </div>
       </form>
     </div>
+    </Modal>
   );
 }
 export default RegisterScreen;

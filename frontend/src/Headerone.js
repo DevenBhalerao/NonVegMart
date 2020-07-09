@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookie from 'js-cookie';
 // import {createHashHistory} from "history";
 import {useHistory} from 'react-router-dom';
+import SigninScreen from './screens/SigninScreen';
 import './App.css';
 
 import './css/elegant-icons.css';
@@ -27,12 +28,14 @@ import MetaTags from 'react-meta-tags';
 import HomeScreen from './screens/ShopScreen';
 import ProductScreen from './screens/ProductScreen1';
 import CartScreen from './screens/CartScreen';
-import SigninScreen from './screens/SigninScreen';
+// import SigninScreen from './screens/SigninScreen';
 import { useSelector, useDispatch } from 'react-redux';
 import RegisterScreen from './screens/RegisterScreen';
 import Amount from './screens/ShopDetails';
 function Headerone() {
   const [search, setSearch] = useState('');
+  const [signin, setSigninModal] = useState(false);
+  console.log(signin);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const categoryList = useSelector((state) => state.categoryList);
@@ -44,6 +47,11 @@ function Headerone() {
   const closeMenu = () => {
     document.querySelector('.sidebar').classList.remove('open');
   };
+  const dispatch = useDispatch();
+  const signinModal = ()=>{
+    setSigninModal(true);
+    dispatch(SigninScreen(signin))
+  }
   // console.log(history)
   const searchHandler = ()=>{
     history.push('/shop/?search=' +search)
@@ -245,7 +253,7 @@ function Headerone() {
                   <div className="col-lg-12">
                     <div className="hero__search">
                       <div className="hero__search__form">
-                        
+                        {/* <form ={searchHandler}> */}
                         { !geolocation/*latitude && longitude*/ ?(
                     
                          <li> Mumbai </li>
@@ -254,11 +262,12 @@ function Headerone() {
                           <a href ='javascript:void(0)' onClick={geolocation} > <i className="fa fa-location-arrow" />Detect Location</a>
                         )
                         }
+                        
                           <input type="text" placeholder="What do you need?" onChange = {e => setSearch(e.target.value)}/>
                           <button type="submit" className="site-btn" onClick={searchHandler}>
                             SEARCH
                           </button>
-                       
+                          {/* </form> */}
                       </div>
 
                     </div>
@@ -286,7 +295,7 @@ function Headerone() {
                   'max-width': '50%',
                 }}>
 
-                  <a href="/signin" style={{ 'font-size': '16px', 'font-family': 'Segoe UI', 'color': '#1c1c1c' }} ><img src={`http://localhost:5000/login.svg`} style={{
+                  <a href='signin' /*onClick={signinModal}*/ style={{ 'font-size': '16px', 'font-family': 'Segoe UI', 'color': '#1c1c1c' }} ><img src={`http://localhost:5000/login.svg`} style={{
                     'display': 'block',
                     'max-width': '40%',
                     'height': 'auto',

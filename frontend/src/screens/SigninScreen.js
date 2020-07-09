@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { signin } from '../actions/userActions';
 import './css/style.css'
 // import '../css/bootstrap-min.css'
-
-function SigninScreen(props) {
+Modal.setAppElement('#root')
+function SigninScreen(props){
+  // console.log(signin);
   const [email, setEmail] = useState('');
  
   const [password, setPassword] = useState('');
@@ -29,6 +31,7 @@ function SigninScreen(props) {
     dispatch(signin(email, password));
   };
   return (
+  <Modal isOpen={true} onRequestClose={false}>
     <div className="signin__form">
       <form onSubmit={submitHandler}>
         <div className=" col-lg-12 form-container">
@@ -74,6 +77,7 @@ function SigninScreen(props) {
         </div>
       </form>
     </div>
+    </Modal>
   );
 }
 export default SigninScreen;

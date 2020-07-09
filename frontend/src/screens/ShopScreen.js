@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listCategory } from '../actions/categoryActions';
-
 import '../css/style.css';
 import 'jquery-ui-dist/jquery-ui.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -18,17 +17,32 @@ import './css/slicknav.min.css';
 import './css/style.css';
 
 function HomeScreen(props) {
+  
+
   let [searchKeyword, setSearchKeyword] = useState('');
-  searchKeyword = props.location.search
-    ? (props.location.search.split('=')[1])
-    : " ";
-  console.log(searchKeyword)
+  let category;
+  let categoryArray = ["Fish" , "chicken" , "Mutton", "Eggs" , "Kebabs"];  
+  category = props.match.params.id ? props.match.params.id : '';
+  for(let i=0;i<5;i++){
+    if(props.location.search.split('=')[1] === categoryArray[i]){
+      category = categoryArray[i];
+    }else{
+      searchKeyword = props.location.search
+      ? (props.location.search.split('=')[1])
+      : " ";
+    }
+  }
+  console.log(category);
   
   const [sortOrder, setSortOrder] = useState('');
-  let category = props.match.params.id ? props.match.params.id : '';
+ 
   // category = searchKeyword;
   const productList = useSelector((state) => state.productList);
+  // console.log(productList);
   const { products, loading, error } = productList;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(9);
+  // console.log(products);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listProducts(category, searchKeyword));
@@ -51,6 +65,21 @@ function HomeScreen(props) {
     props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
   };
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct , indexOfLastProduct);
+
+  const pageNumbers = [];
+  const totalProducts = products.length;
+
+  const paginate = (pageNumber)=>{
+    setCurrentPage(pageNumber);
+  }
+  for(let i=1;i <= Math.ceil(totalProducts / productsPerPage) ; i++){
+    pageNumbers.push(i);
+  }
+
+  console.log(currentProducts);
   return (
     <>
       <section class="product spad">
@@ -94,7 +123,7 @@ function HomeScreen(props) {
                   </ul>
                 </div>
 
-                <div class="sidebar__item">
+                {/* <div class="sidebar__item">
                   <div class="latest-product__text">
                     <h4>Latest Products</h4>
                     <div class="latest-product__slider owl-carousel">
@@ -158,7 +187,7 @@ function HomeScreen(props) {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div class="col-lg-9 col-md-7">
@@ -199,7 +228,7 @@ function HomeScreen(props) {
                 </div>
               </div>
               <div class="row">
-                {products.map((product) => (
+                {currentProducts.map((product) => (
                   <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="product__item">
                       <Link to={'/product/' + product._id}>
@@ -207,7 +236,8 @@ function HomeScreen(props) {
                           class="product__item__pic set-bg"
                           
                         >
-                          <img src={product.image} alt="product" />
+                          <img src={`http://localhost:5000/${product.image}`} alt="product" />
+                          {console.log(product.image)}
                         </div>
                       </Link>
                      
@@ -221,14 +251,15 @@ function HomeScreen(props) {
                   </div>
                 ))}
               </div>
-              <div class="product__pagination">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">
-                  <i class="fa fa-long-arrow-right"></i>
-                </a>
-              </div>
+              {/* <Pagination productsPerPage={productsPerPage} totalProduct = {products.length}/>  */}
+              <center><div class="product__pagination">
+              {pageNumbers.map(number => (
+                <a onClick={()=> paginate(number)} href="javascript:void(0)"> {number}</a>
+                ))}
+              
+                <a><i class="fa fa-long-arrow-right"></i></a>
+                
+              </div></center>
             </div>
           </div>
         </div>

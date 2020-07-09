@@ -3558,3 +3558,9 @@ ol {
   margin-left: 20px;
   list-style: disc;
 }
+
+.Modal{
+  background-color: red;
+  width: 300px;
+}
+

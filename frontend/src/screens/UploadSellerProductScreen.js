@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import Modal from 'react-modal';
+// import {Modal, Button } from 'reactstrap';
 import { sellersaveProduct, sellerlistProducts, sellerdeleteProdcut } from '../actions/sellerProductActions';
 import {
   saveCategory,
@@ -10,6 +11,7 @@ import {
 // import CharacterDropDown from '../components/utils/CharacterDropDown';
 import FileUpload from '../components/FileUploads';
 import './css/style.css';
+
 function SellerProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
@@ -91,23 +93,25 @@ function SellerProductsScreen(props) {
     setCategoryId(categoryId_temp);
     setCategoryName(categoryName_temp);
   };
-
-
+  // console.log(modalVisible)
+ 
   return <div className="content content-margined">
 
     <div className="product-header" style={{ 'margin-bottom': '7%' }}>
       <h4 className="signin-title" style={{ 'margin-left': '10%' }}>
         Seller Products
-        </h4>
+      </h4>
       <button
         className="btn-primary"
         style={{ float: 'right', 'margin-right': '20%' }}
-        onClick={() => openModal({})}
+        onClick={openModal}
       >
         Create Product
         </button>
-    </div>
-    {modalVisible &&
+   
+    {/* {console.log(modalVisible)}  */}
+    <Modal isOpen={modalVisible} onRequestClose = {() => setModalVisible(false)}>
+    {
       <div className="signin__form">
         <form onSubmit={submitHandler} >
           <div className="form-container">
@@ -118,7 +122,7 @@ function SellerProductsScreen(props) {
               {loadingSave && <div>Loading...</div>}
               {errorSave && <div>{errorSave}</div>}
             </div>
-
+  
             <div className="signin__input">
               <label htmlFor="name">
                 Name
@@ -162,8 +166,8 @@ function SellerProductsScreen(props) {
                     {name}
                   </option>
                 ))}
-
-
+  
+  
               </select>
             </div>
             <div className="signin__input">
@@ -183,17 +187,20 @@ function SellerProductsScreen(props) {
               <FileUpload refreshFunction={updateImages} />
               <br></br>
             </div>
-
+  
             <button type="submit" className="button site-btn">{id ? "Update" : "Create"}</button>
-
+  
             <button type="button" onClick={() => setModalVisible(false)} className="back__button">Back</button>
-
+  
           </div>
         </form>
       </div>
     }
 
-
+    </Modal>
+   
+    
+    </div>
     <div className="product-list">
 
       <table className="table">

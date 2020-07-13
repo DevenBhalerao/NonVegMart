@@ -25,6 +25,7 @@ router.put('/:id', isAuth, async (req, res) => {
 });
 
 router.post('/signin', async (req, res) => {
+  console.log(req.body);
   const signinUser = await User.findOne({
     email: req.body.email,
     password: req.body.password,
@@ -35,6 +36,8 @@ router.post('/signin', async (req, res) => {
       name: signinUser.name,
       email: signinUser.email,
       isAdmin: signinUser.isAdmin,
+      isSeller: signinUser.isSeller,
+      isDeliveryPerson: signinUser.isDeliveryPerson,
       token: getToken(signinUser),
     });
   } else {
@@ -43,10 +46,16 @@ router.post('/signin', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
+  if (req.body.seller === 'on') {
+    req.body.seller = true;
+  } else {
+    req.body.seller = false;
+  }
   const user = new User({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    isSeller: req.body.seller,
   });
   const newUser = await user.save();
   if (newUser) {
@@ -55,8 +64,12 @@ router.post('/register', async (req, res) => {
       name: newUser.name,
       email: newUser.email,
       isAdmin: newUser.isAdmin,
+      isSeller: newUser.isSeller,
+      isDeliveryPerson: newUser.isDeliveryPerson,
       token: getToken(newUser),
     });
+
+    //console.log(newUser);
   } else {
     res.status(401).send({ msg: 'Invalid User Data.' });
   }
@@ -76,5 +89,36 @@ router.get('/createadmin', async (req, res) => {
     res.send({ msg: error.message });
   }
 });
+
+router.get('/seller', async (req, res) => {
+  try {
+    const user = new User({
+      name: 'abc',
+      email: 'abc@example.com',
+      password: '1111',
+      isSeller: true,
+    });
+    const newUser = await user.save();
+    res.send(newUser);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+})
+
+router.get('/delivery-person', async (req, res) => {
+  try {
+    const user = new User({
+      name: 'def',
+      email: 'def@example.com',
+      password: '0000',
+      isDeliveryPerson: true
+
+    });
+    const newUser = await user.save();
+    res.send(newUser);
+  } catch (error) {
+    res.send({ msg: error.message });
+  }
+})
 
 export default router;

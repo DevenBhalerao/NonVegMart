@@ -1,14 +1,16 @@
 import express from 'express';
 import Category from '../models/categoryModel';
 import { isAuth, isAdmin } from '../util';
+import Product from '../models/productModel';
 
 const router = express.Router();
 
-router.get('/:id', async (req, res) => {
-  const category = await Category.findOne({ _id: req.params.id });
-
-  if (category) {
-    res.send(category);
+router.get('/:categoryId', async (req, res) => {
+  const categoryId = req.params.categoryId;
+  const products = await Product.find({ categoryId: categoryId });
+  console.log(products);
+  if (products) {
+    res.send(products);
   } else {
     res.status(404).send({ message: 'Category Not Found.' });
   }
@@ -21,7 +23,6 @@ router.get('/', async (req, res) => {
 router.put('/:id', isAuth, isAdmin, async (req, res) => {
   const categoryId = req.params.id;
   const category = await Category.findById(categoryId);
-  console.log(category);
   if (category) {
     category.name = req.body.name;
     category.description = req.body.description;
@@ -45,7 +46,7 @@ router.delete('/:id', isAuth, isAdmin, async (req, res) => {
   }
 });
 
-router.post('/', isAuth, isAdmin, async (req, res) => {
+router.post('/', async (req, res) => {
   const category = new Category({
     name: req.body.name,
     description: req.body.description,

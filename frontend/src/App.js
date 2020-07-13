@@ -1,8 +1,8 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import './App.css';
-import './index.css';
-import HomeScreen from './screens/HomeScreen1';
+import './screens/css/style.css';
+import HomeScreen from './screens/ShopScreen';
 import ProductScreen from './screens/ProductScreen1';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
@@ -17,6 +17,9 @@ import ProfileScreen from './screens/ProfileScreen';
 import OrdersScreen from './screens/OrdersScreen';
 import UploadCategoryScreen from './screens/UploadCategoryScreen';
 import CategoryScreen1 from './screens/CategoryScreen1';
+import Headerone from './HeaderOne'
+import Footer from './screens/footer'
+import LandingScreen from './screens/LandingSreen'
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -31,49 +34,12 @@ function App() {
   };
   return (
     <BrowserRouter>
+    <div>
+     <Headerone/>
+     </div>
       <div className="grid-container">
-        <header className="header">
-          <div className="brand">
-            <button onClick={openMenu}>&#9776;</button>
-            <Link to="/">Non Veg Mart</Link>
-          </div>
-          <div className="header-links">
-            <a href="cart.html">Cart</a>
-            {userInfo ? (
-              <Link to="/profile">{userInfo.name}</Link>
-            ) : (
-              <Link to="/signin">Sign In</Link>
-            )}
-            {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
-                <a href="#">Admin</a>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/orders">Orders</Link>
-                    <Link to="/products">Products</Link>
-                    <Link to="/categories">Categories</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-        </header>
-        <aside className="sidebar">
-          <h3>Shopping Categories</h3>
-          <button className="sidebar-close-button" onClick={closeMenu}>
-            x
-          </button>
-          <table className="categories">
-          
-            {category &&
-              category.map((category) => (
-                <tr key={category._id}>
-                  <td> <Link to={'/category/' + category._id}>{category.name}</Link>
-                  </td></tr>
-                ))}
-           </table>
-        
-        </aside>
+       
+       
         <main className="main">
           <div className="content">
             <Route path="/orders" component={OrdersScreen} />
@@ -89,12 +55,15 @@ function App() {
             <Route path="/product/:id" component={ProductScreen} />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/category/:id" component={CategoryScreen1} />
-            <Route path="/" exact={true} component={HomeScreen} />
+            <Route path="/shop"  component={HomeScreen} />
+            <Route path="/" exact={true} component={LandingScreen} />
           </div>
         </main>
         <footer className="footer">All right reserved.</footer>
       </div>
+      <Footer />
     </BrowserRouter>
+ 
   );
 }
 

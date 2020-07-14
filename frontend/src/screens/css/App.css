@@ -44,3 +44,15 @@ h1 {
   font-size: 80px;
   font-weight: 900;
 }
+
+/* Dropdown*/
+#dropdown-split-basic{
+
+  position: relative;
+  bottom:3px;
+ 
+}
+#dropdown-split-basic:hover{
+  color: green;
+ 
+}

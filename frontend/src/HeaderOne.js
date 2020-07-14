@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Component } from 'react';
-import {Card,Accordion , Navbar , Nav, NavDropdown , Form, FormControl, Button} from 'react-bootstrap';
+import {Card,Accordion , Navbar , Nav, NavDropdown , Form, FormControl, Button, ButtonGroup, SplitButton} from 'react-bootstrap';
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import Dropdown from 'react-bootstrap/Dropdown'
+import DropdownButton from 'react-bootstrap/DropdownButton'
 import Cookie from 'js-cookie';
 
 // import {createHashHistory} from "history";
@@ -80,21 +82,63 @@ function Headerone(props) {
       <Nav.Link id="NavLink" href="/">About Us</Nav.Link>
       <Nav.Link id="NavLink" href="/">Contact</Nav.Link>
     </Nav>
+
+    <div class="col-lg-2 " style={{
+
+'justify-content': 'center',
+
+}}>
+
+{!userInfo && (
+
+  <li class="redhover" style={{
+    'list-style-type': 'none', 'font-size': '16px', 'font-family': 'Segoe UI', 'padding': '24px 00px', 'margin-left': '130px',
+    'max-width': '50%',
+  }}>
+
+    <a href='signin'>Sign in</a>
+
+
+  </li>
+
+)
+
+}
+
+{userInfo && userInfo.isAdmin && (
+  <Dropdown as = {ButtonGroup}>
+  {/* <Button variant="success">Hello {userInfo.name}</Button> */}
+  <div>Hello, {userInfo.name}</div>
+  <Dropdown.Toggle split variant="white" id="dropdown-split-basic"><i class="fa fa-chevron-down" /></Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="/profile">My Account</Dropdown.Item>
+    <Dropdown.Item href="/cart">My Cart</Dropdown.Item>
+    <Dropdown.Item href="/products">My products</Dropdown.Item>
+    <Dropdown.Item href="/orders">My orders</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+)}
+
+{userInfo && userInfo.isSeller && (
+  <Dropdown as = {ButtonGroup}>
+  {/* <Button variant="success">Hello {userInfo.name}</Button> */}
+  <div>Hello, {userInfo.name}</div>
+  <Dropdown.Toggle split variant="white" id="dropdown-split-basic"><i class="fa fa-chevron-down" /></Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="/profile">My Account</Dropdown.Item>
+    <Dropdown.Item href="/cart">My Cart</Dropdown.Item>
+    <Dropdown.Item href="/sellerproduct">My products</Dropdown.Item>
+    <Dropdown.Item href="/sellerorders">My orders</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+)}
+
+</div>
   </Navbar.Collapse>
+ 
   </Navbar>
-  <Accordion defaultActiveKey="0">
-  
-      <Accordion.Toggle as={Button} variant="link" eventKey="0">
-        Click me!
-      </Accordion.Toggle>
-    
-    <Accordion.Collapse eventKey="0">
-     <input type="text"></input>
-    </Accordion.Collapse>
- 
- 
-</Accordion>
- 
 </div>
   );
 }

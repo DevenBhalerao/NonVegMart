@@ -24,7 +24,7 @@ import './css/style.css'
 									<input className="" type="email" name="Email" placeholder="Email Address*" />
 									<i className="fa fa-envelope"></i>
 								</div>
-								<button className="btn hvr-hover" type="submit">Submit</button>
+								<button style={{'color' : 'white'}}className="btn hvr-hover" type="submit">Submit</button>
 							</form>
 						</div>
 					</div>
@@ -57,11 +57,11 @@ import './css/style.css'
                         <div className="footer-link">
                             <h4>Information</h4>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="/about-us">About Us</a></li>
+                                <li><a href="/refund-return">Refund and Return</a></li>
                                 <li><a href="#">Our Sitemap</a></li>
                                 <li><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="/privacy-policy">Privacy Policy</a></li>
                                 <li><a href="#">Delivery Information</a></li>
                             </ul>
                         </div>

@@ -1,10 +1,11 @@
-import React, { useState, useEffect, Component } from 'react';
-import {Card,Accordion , Navbar , Nav, NavDropdown , Form, FormControl, Button, ButtonGroup, SplitButton} from 'react-bootstrap';
-import Jumbotron from 'react-bootstrap/Jumbotron'
+import React, { useState, useEffect } from 'react';
+import {  Card,Accordion , Navbar , Nav, NavDropdown , Form, FormControl, Button, ButtonGroup, SplitButton} from 'react-bootstrap';
+import Modal from 'react-responsive-modal'
 import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
 import Cookie from 'js-cookie';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { signin } from './actions/userActions';
+import { Link } from 'react-router-dom';
 // import {createHashHistory} from "history";
 import './screens/css/style.css'
 import './screens/css/App.css'
@@ -13,18 +14,19 @@ import SigninScreen from './screens/SigninScreen';
 // import MetaTags from 'react-meta-tags';
 
 // import SigninScreen from './screens/SigninScreen';
-import { useSelector, useDispatch } from 'react-redux';
 function Headerone(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
+  const [signinModal , setSigninModal] = useState(false);
   const [search, setSearch] = useState('');
-  const [signin, setSigninModal] = useState(false);
-  console.log(signin);
+  const [email, setEmail] = useState('');
+  console.log(email);
+  const [password, setPassword] = useState('');
   const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const { loading, userInfo, error } = userSignin;
   const categoryList = useSelector((state) => state.categoryList);
-  const { loading, category, error } = categoryList;
+  const {  category } = categoryList;
   const history = useHistory();
   const openMenu = () => {
     document.querySelector('.sidebar').classNameNameList.add('open');
@@ -33,14 +35,25 @@ function Headerone(props) {
     document.querySelector('.sidebar').classNameNameList.remove('open');
   };
   const dispatch = useDispatch();
-  const signinModal = ()=>{
-    setSigninModal(true);
-    dispatch(SigninScreen(signin))
-  }
-  // console.log(history)
-  const searchHandler = ()=>{
-    history.push('/shop/?search=' +search)
+  
+  // const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     props.history.push(redirect);
+  //   }
+  //   return () => {
+  //     //
+  //   };
+  // }, [userInfo]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
   };
+  // console.log(history)
+  // const searchHandler = ()=>{
+  //   history.push('/shop/?search=' +search)
+  // };
   let latitude,longitude;
   function geolocation(e){
     e.preventDefault();
@@ -61,11 +74,20 @@ function Headerone(props) {
     
   }
  
+  
 
   return (
     <div>
   <Navbar className="nav" expand="xl">
-  <Navbar.Brand href="#home">Non-Veg Mart Logo</Navbar.Brand>
+  <Navbar.Brand href="/" style={{'width' : '300px' , 'height' : '100px'}}>
+ 
+        <img
+          style={{'margin-left':'50px' , width: '20%', height: '100%' }}
+          src={`http://localhost:5000/logo.png`}
+          alt=""
+          />
+    
+  </Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav id="navLinks">
@@ -79,7 +101,7 @@ function Headerone(props) {
        
       </NavDropdown>
       <Nav.Link id="NavLink" href="/">Gallery</Nav.Link>
-      <Nav.Link id="NavLink" href="/">About Us</Nav.Link>
+      <Nav.Link id="NavLink" href="/about-us">About Us</Nav.Link>
       <Nav.Link id="NavLink" href="/">Contact</Nav.Link>
     </Nav>
 
@@ -92,11 +114,11 @@ function Headerone(props) {
 {!userInfo && (
 
   <li class="redhover" style={{
-    'list-style-type': 'none', 'font-size': '16px', 'font-family': 'Segoe UI', 'padding': '24px 00px', 'margin-left': '130px',
+    'list-style-type': 'none', 'font-size': '16px', 'font-family': 'Segoe UI', 'padding': '24px 00px', 'margin-left': '70px',
     'max-width': '50%',
   }}>
 
-    <a href='signin'>Sign in</a>
+    <a href='/signin'>Sign in</a>
 
 
   </li>
@@ -105,10 +127,13 @@ function Headerone(props) {
 
 }
 
+
+
+
 {userInfo && userInfo.isAdmin && (
   <Dropdown as = {ButtonGroup}>
   {/* <Button variant="success">Hello {userInfo.name}</Button> */}
-  <div>Hello, {userInfo.name}</div>
+  <div style={{'padding-top':'10px;' , 'background-color':'green;'}}>Hello, {userInfo.name}</div>
   <Dropdown.Toggle split variant="white" id="dropdown-split-basic"><i class="fa fa-chevron-down" /></Dropdown.Toggle>
 
   <Dropdown.Menu>

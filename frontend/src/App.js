@@ -20,6 +20,9 @@ import CategoryScreen1 from './screens/CategoryScreen1';
 import Headerone from './HeaderOne'
 import Footer from './screens/footer'
 import LandingScreen from './screens/LandingSreen'
+import aboutUs from './about-us'
+import privacyPolicy from './PrivacyPolicy'
+import refund from './refundandreturn'
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -57,6 +60,9 @@ function App() {
             <Route path="/category/:id" component={CategoryScreen1} />
             <Route path="/shop"  component={HomeScreen} />
             <Route path="/" exact={true} component={LandingScreen} />
+            <Route path="/about-us" component={aboutUs}/>
+            <Route path="/privacy-policy" component={privacyPolicy}/>
+            <Route path='/refund-return' component={refund}/>
           </div>
         </main>
         <footer className="footer">All right reserved.</footer>

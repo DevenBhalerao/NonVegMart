@@ -7,6 +7,7 @@ import { listCategory } from '../actions/categoryActions';
 import './css/style.css'
 
 function HomeScreen(props) {
+  const qty = 1;
   const [searchKeyword, setSearchKeyword] = useState('');
   const [sortOrder, setSortOrder] = useState('');
   const category = props.match.params.id ? props.match.params.id : '';
@@ -29,6 +30,11 @@ function HomeScreen(props) {
     setSortOrder(e.target.value);
     dispatch(listProducts(category, searchKeyword, sortOrder));
   };
+
+  const handleAddToCart = () => {
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+  }
+
 
   return (
     <div>
@@ -86,20 +92,20 @@ function HomeScreen(props) {
                                         <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                           
                                             <div className="products-single fix">
-                                                <div className="box-img-hover">
-                                                    <img src= {`http://localhost:5000/${product.image}`}  className="img-fluid" alt="Image" />
+                                                <Link to={"/product/" + product._id}><div className="box-img-hover">
+                                                    <img  style={{'height' : '150px' , width:'100%'}}src= {`http://localhost:5000/${product.image}`}  className="img-fluid" alt="Image" />
                                                     <div className="mask-icon">
                                                         <ul>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i className="fa fa-eye"></i></a></li>
                                                             {/* <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i className="fas fa-sync-alt"></i></a></li> */}
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i className="fa fa-heart"></i></a></li>
                                                         </ul>
-                                                        <a className="cart" href="#">Add to Cart</a>
+                                                        <a className="cart" href="javascript:void(0)" onClick={handleAddToCart}>Add to Cart</a>
                                                     </div>
-                                                </div>
+                                                </div></Link>
                                                 <div className="why-text">
                                                     <h4>{product.name}</h4>
-                                                    <h5>{product.price}</h5>
+                                                    <h5> &#8377; {product.price}</h5>
                                                 </div>
                                             </div>
                                             

@@ -7,44 +7,6 @@ import './css/style.css'
       <footer>
         <div className="footer-main">
             <div className="container">
-				      <div className="row">
-					      <div className="col-lg-4 col-md-12 col-sm-12">
-						      <div className="footer-top-box">
-							      <h3>Business Time</h3>
-							      <ul className="list-time">
-								      <li>Monday - Friday: 08.00am to 05.00pm</li> <li>Saturday: 10.00am to 08.00pm</li> <li>Sunday: <span>Closed</span></li>
-							      </ul>
-						      </div>
-					      </div>
-					    <div className="col-lg-4 col-md-12 col-sm-12">
-						<div className="footer-top-box">
-							<h3>Newsletter</h3>
-							<form className="newsletter-box">
-								<div className="form-group">
-									<input className="" type="email" name="Email" placeholder="Email Address*" />
-									<i className="fa fa-envelope"></i>
-								</div>
-								<button style={{'color' : 'white'}}className="btn hvr-hover" type="submit">Submit</button>
-							</form>
-						</div>
-					</div>
-					<div className="col-lg-4 col-md-12 col-sm-12">
-						<div className="footer-top-box">
-							<h3>Social Media</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-							<ul>
-                                <li><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i className="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i className="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i className="fa fa-rss" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i className="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i className="fa fa-whatsapp" aria-hidden="true"></i></a></li>
-                            </ul>
-						</div>
-					</div>
-				</div>
-				<hr></hr>
                 <div className="row">
                     <div className="col-lg-4 col-md-12 col-sm-12">
                         <div className="footer-widget">
@@ -71,18 +33,39 @@ import './css/style.css'
                             <h4>Contact Us</h4>
                             <ul>
                                 <li>
-                                    <p><i className="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br></br>Preston Street Wichita,<br></br> KS 67213 </p>
+                                    <p><i className="fa fa-map-marker"></i>Address: Michael I. Days 3756 <br></br>Preston Street Wichita,<br></br> KS 67213 </p>
                                 </li>
                                 <li>
-                                    <p><i className="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                    <p><i className="fa fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
                                 </li>
                                 <li>
-                                    <p><i className="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                    <p><i className="fa fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
                                 </li>
                             </ul>
+                    
+						 
+					
                         </div>
+                        
                     </div>
+                    
                 </div>
+                <div  className="row">
+                    <div style={{marginLeft:'758px'}}  className="col-lg-4 col-md-12 col-sm-12">
+                    <div className="footer-top-box">
+							
+							<ul>
+                                <li><a href="#"><i className="fa fa-facebook" ></i></a></li>
+                                <li><a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i className="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i className="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i className="fa fa-rss" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i className="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i className="fa fa-whatsapp" aria-hidden="true"></i></a></li>
+                            </ul>
+				    </div>
+                    </div>
+                    </div>
             </div>
         </div>
     </footer>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Card,Accordion , Navbar , Nav, NavDropdown , Form, FormControl, Button, ButtonGroup, SplitButton} from 'react-bootstrap';
+import {  Card,Accordion , Navbar , Nav, NavDropdown , Form, FormControl, Button, ButtonGroup, SplitButton, Badge} from 'react-bootstrap';
 import Modal from 'react-responsive-modal'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Cookie from 'js-cookie';
@@ -56,7 +56,7 @@ function Headerone(props) {
   // };
   let latitude,longitude;
   function geolocation(e){
-    e.preventDefault();
+    // e.preventDefault();
     if("geolocation" in navigator){
      
       navigator.geolocation.getCurrentPosition((p,e) => {
@@ -65,7 +65,8 @@ function Headerone(props) {
         }else{
           latitude = p.coords.latitude;
           longitude = p.coords.longitude;
-          Cookie.set(latitude , longitude);
+          Cookie.set("latitude", latitude);
+          Cookie.set("longitude", longitude);
           // location = latitude + longitude;
           console.log(`latitude = ${latitude}` , `longitude = ${longitude}`);
         }
@@ -74,7 +75,14 @@ function Headerone(props) {
     
   }
  
-  
+  geolocation();
+  const cartItems = Cookie.getJSON('cartItems') || [];
+  let badgeStyle = "Badge btn btn-";
+  if(cartItems.length === 0){
+    badgeStyle += "warning";
+  }else{
+    badgeStyle += "success";
+  }
 
   return (
     <div>
@@ -92,17 +100,9 @@ function Headerone(props) {
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav id="navLinks">
       <Nav.Link id="NavLink" href="/">Home</Nav.Link>
-      <NavDropdown  title="Shop" id="basic-nav-dropdown">
-     
-        <NavDropdown.Item id="NavDropdownItem"href="#action/3.1">Action</NavDropdown.Item>
-        <NavDropdown.Item id="NavDropdownItem" href="#action/3.2">Another action</NavDropdown.Item>
-        <NavDropdown.Item id="NavDropdownItem" href="#action/3.3">Something</NavDropdown.Item>
-        
-       
-      </NavDropdown>
-      <Nav.Link id="NavLink" href="/">Gallery</Nav.Link>
+      <Nav.Link id="NavLink" href="/shop">Shop</Nav.Link>
       <Nav.Link id="NavLink" href="/about-us">About Us</Nav.Link>
-      <Nav.Link id="NavLink" href="/">Contact</Nav.Link>
+      <Nav.Link id="NavLink" href="/">Chat with us</Nav.Link>
     </Nav>
 
     <div class="col-lg-2 " style={{
@@ -128,7 +128,19 @@ function Headerone(props) {
 }
 
 
+{userInfo && !userInfo.isAdmin && !userInfo.isSeller && (
+  <Dropdown as = {ButtonGroup}>
+  {/* <Button variant="success">Hello {userInfo.name}</Button> */}
+  <div style={{ 'background-color':'green;'}}>Hello, {userInfo.name}</div>
+  <Dropdown.Toggle split variant="white" id="dropdown-split-basic"><i class="fa fa-chevron-down" /></Dropdown.Toggle>
 
+  <Dropdown.Menu>
+    <Dropdown.Item href="/profile">My Account</Dropdown.Item>
+    <Dropdown.Item href="/cart">My Cart</Dropdown.Item>
+    <Dropdown.Item href="/orders">My orders</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+)}
 
 {userInfo && userInfo.isAdmin && (
   <Dropdown as = {ButtonGroup}>
@@ -148,19 +160,27 @@ function Headerone(props) {
 {userInfo && userInfo.isSeller && (
   <Dropdown as = {ButtonGroup}>
   {/* <Button variant="success">Hello {userInfo.name}</Button> */}
-  <div>Hello, {userInfo.name}</div>
+  <div style={{'padding-top':'20px;' , 'background-color':'green;'}}>Hello, {userInfo.name}</div>
   <Dropdown.Toggle split variant="white" id="dropdown-split-basic"><i class="fa fa-chevron-down" /></Dropdown.Toggle>
 
   <Dropdown.Menu>
     <Dropdown.Item href="/profile">My Account</Dropdown.Item>
     <Dropdown.Item href="/cart">My Cart</Dropdown.Item>
-    <Dropdown.Item href="/sellerproduct">My products</Dropdown.Item>
+    <Dropdown.Item href="/sellerproducts">My products</Dropdown.Item>
     <Dropdown.Item href="/sellerorders">My orders</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
 )}
 
+  
+
 </div>
+
+  <div>
+  <a href='/cart'><i className="fa fa-shopping-cart fa-lg"></i></a>
+  { userInfo ?  (<small><Badge className={badgeStyle}>{cartItems.length}</Badge></small>) : (<div></div>) }
+  </div>
+  
   </Navbar.Collapse>
  
   </Navbar>

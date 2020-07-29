@@ -4,6 +4,14 @@ import { getToken, isAuth } from '../util';
 
 const router = express.Router();
 
+router.get('/' ,  (req,res) => {
+  res.send({
+    message:'Got all the users',
+    users:User
+  });
+})
+
+
 router.put('/:id', isAuth, async (req, res) => {
   const userId = req.params.id;
   const user = await User.findById(userId);
@@ -24,8 +32,10 @@ router.put('/:id', isAuth, async (req, res) => {
   }
 });
 
+// const d = "Hello from the serrver!"
+
 router.post('/signin', async (req, res) => {
-  console.log(req.body);
+  
   const signinUser = await User.findOne({
     email: req.body.email,
     password: req.body.password,
@@ -46,11 +56,14 @@ router.post('/signin', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
+
+  console.log(req.body.seller);
   if (req.body.seller === 'on') {
     req.body.seller = true;
   } else {
     req.body.seller = false;
   }
+  
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -58,6 +71,7 @@ router.post('/register', async (req, res) => {
     isSeller: req.body.seller,
   });
   const newUser = await user.save();
+  console.log(newUser);
   if (newUser) {
     res.send({
       _id: newUser.id,
@@ -119,6 +133,7 @@ router.get('/delivery-person', async (req, res) => {
   } catch (error) {
     res.send({ msg: error.message });
   }
+  
 })
 
 export default router;

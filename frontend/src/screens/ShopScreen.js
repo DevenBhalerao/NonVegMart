@@ -8,20 +8,48 @@ import './css/style.css'
 
 function HomeScreen(props) {
   const qty = 1;
-  const [searchKeyword, setSearchKeyword] = useState('');
+  let [searchKeyword, setSearchKeyword] = useState('');
   const [sortOrder, setSortOrder] = useState('');
-  const category = props.match.params.id ? props.match.params.id : '';
+//   const category = props.match.params.id ? props.match.params.id : '';
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(6);
   const dispatch = useDispatch();
+  let category;
+  let categoryArray = ["Fish" , "chicken" , "Mutton", "Eggs" , "Kebabs", "Cold-Cuts"];  
+  category = props.match.params.id ? props.match.params.id : '';
+  for(let i=0;i<categoryArray.length;i++){
+    if(props.location.search.split('=')[1] === categoryArray[i]){
+      category = categoryArray[i];
+    }else{
+      searchKeyword = props.location.search
+      ? (props.location.search.split('=')[1])
+      : " ";
+    }
+  }
   useEffect(() => {
-    dispatch(listProducts(category));
+    dispatch(listProducts(category , searchKeyword));
     dispatch(listCategory(category));
     return () => {
       //
     };
   }, [category]);
 
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct , indexOfLastProduct);
+
+  const pageNumbers = [];
+  const totalProducts = products.length;
+
+  const paginate = (pageNumber)=>{
+    setCurrentPage(pageNumber);
+  }
+  for(let i=1;i <= Math.ceil(totalProducts / productsPerPage) ; i++){
+    pageNumbers.push(i);
+  }
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(listProducts(category, searchKeyword, sortOrder));
@@ -31,8 +59,9 @@ function HomeScreen(props) {
     dispatch(listProducts(category, searchKeyword, sortOrder));
   };
 
-  const handleAddToCart = () => {
-    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+
+  const handleAddToCart = (e) => {
+    props.history.push("/cart/" + e + "?qty=" + qty)
   }
 
 
@@ -88,21 +117,21 @@ function HomeScreen(props) {
                             <div className="tab-content">
                                 <div role="tabpanel" className="tab-pane fade show active" id="grid-view">
                                     <div className="row">
-                                    {products.map((product) => (
+                                    {currentProducts.map((product) => (
                                         <div className="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                           
                                             <div className="products-single fix">
-                                                <Link to={"/product/" + product._id}><div className="box-img-hover">
-                                                    <img  style={{'height' : '150px' , width:'100%'}}src= {`http://localhost:5000/${product.image}`}  className="img-fluid" alt="Image" />
+                                                <div className="box-img-hover">
+                                                <Link to={"/product/" + product._id}><img  style={{'height' : '150px' , width:'100%'}}src= {`http://localhost:5000/${product.image}`}  className="img-fluid" alt="Image" /></Link>
                                                     <div className="mask-icon">
                                                         <ul>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i className="fa fa-eye"></i></a></li>
                                                             {/* <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i className="fas fa-sync-alt"></i></a></li> */}
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i className="fa fa-heart"></i></a></li>
                                                         </ul>
-                                                        <a className="cart" href="javascript:void(0)" onClick={handleAddToCart}>Add to Cart</a>
+                                                        <a href={"/cart/" + product._id + "?qty=" + qty} className="cart">Add to Cart</a>
                                                     </div>
-                                                </div></Link>
+                                                </div>
                                                 <div className="why-text">
                                                     <h4>{product.name}</h4>
                                                     <h5> &#8377; {product.price}</h5>
@@ -111,67 +140,66 @@ function HomeScreen(props) {
                                             
                                         </div> 
                                         ))}
+                                        
                                 </div>
-                       
+                        <center><div class="product__pagination">
+                            {pageNumbers.map(number => (
+                                <span style={{ marginLeft:'10px'}}><a className='product_pagination'
+                                onClick={()=> paginate(number)} href="javascript:void(0)"> {number}</a></span>
+                                ))}
+                            
+                                <a><i class="fa fa-long-arrow-right"></i></a>
+                                
+                            </div></center>
                             </div>
+                            
                         </div>
+                        
                     </div>
                 </div>
-				<div className="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                
+				<div style={{position:'absolute' , top:'0rem', left:'56rem' }} className="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div className="product-categorie">
-                        <div className="search-product">
-                            <form action="#">
-                                <input className="form-control" placeholder="Search here..." type="text" />
-                                <button type="submit"> <i className="fa fa-search"></i> </button>
-                            </form>
-                        </div>
+                        
                         <div className="filter-sidebar-left">
                             <div className="title-left">
                                 <h3>Categories</h3>
                             </div>
                             <div className="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
                                 <div className="list-group-collapse sub-men">
-                                    <a className="list-group-item list-group-item-action" href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Fruits & Drinks <small className="text-muted">(100)</small>
+                                    <a className="list-group-item list-group-item-action" href="/shop/searchCategory?=Fish" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Fish <small className="text-muted"></small>
 								</a>
-                                    <div className="collapse show" id="sub-men1" data-parent="#list-group-men">
-                                        <div className="list-group">
-                                            <a href="#" className="list-group-item list-group-item-action active">Fruits 1 <small className="text-muted">(50)</small></a>
-                                            <a href="#" className="list-group-item list-group-item-action">Fruits 2 <small className="text-muted">(10)</small></a>
-                                            <a href="#" className="list-group-item list-group-item-action">Fruits 3 <small className="text-muted">(10)</small></a>
-                                            <a href="#" className="list-group-item list-group-item-action">Fruits 4 <small className="text-muted">(10)</small></a>
-                                            <a href="#" className="list-group-item list-group-item-action">Fruits 5 <small className="text-muted">(20)</small></a>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div className="list-group-collapse sub-men">
-                                    <a className="list-group-item list-group-item-action" href="#sub-men2" data-toggle="collapse" aria-expanded="false" aria-controls="sub-men2">Vegetables 
-								<small className="text-muted">(50)</small>
+                                    <a className="list-group-item list-group-item-action" href="/shop/searchCategory?=chicken" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Chicken <small className="text-muted"></small>
 								</a>
-                                    <div className="collapse" id="sub-men2" data-parent="#list-group-men">
-                                        <div className="list-group">
-                                            <a href="#" className="list-group-item list-group-item-action">Vegetables 1 <small className="text-muted">(10)</small></a>
-                                            <a href="#" className="list-group-item list-group-item-action">Vegetables 2 <small className="text-muted">(20)</small></a>
-                                            <a href="#" className="list-group-item list-group-item-action">Vegetables 3 <small className="text-muted">(20)</small></a>
-                                        </div>
-                                    </div>
+
                                 </div>
-                                <a href="#" className="list-group-item list-group-item-action"> Grocery  <small className="text-muted">(150) </small></a>
-                                <a href="#" className="list-group-item list-group-item-action"> Grocery <small className="text-muted">(11)</small></a>
-                                <a href="#" className="list-group-item list-group-item-action"> Grocery <small className="text-muted">(22)</small></a>
-                            </div>
+                                <div className="list-group-collapse sub-men">
+                                    <a className="list-group-item list-group-item-action" href="/shop/searchCategory?=Mutton" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Mutton <small className="text-muted"></small>
+								</a>
+
+                                </div>
+                                <div className="list-group-collapse sub-men">
+                                    <a className="list-group-item list-group-item-action" href="/shop/searchCategory?=Kebabs" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Kebabs<small className="text-muted"></small>
+								</a>
+
+                                </div>
+                                <div className="list-group-collapse sub-men">
+                                    <a className="list-group-item list-group-item-action" href="/shop/searchCategory?=Eggs" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Eggs<small className="text-muted"></small>
+								</a>
+
+                                </div>
+                                <div className="list-group-collapse sub-men">
+                                    <a className="list-group-item list-group-item-action" href="/shop/searchCategory?=Cold-Cuts" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1">Cold-Cuts <small className="text-muted"></small>
+								</a>
+
+                                </div>
+                                
+                               </div>
                         </div>
-                        <div className="filter-price-left">
-                            <div className="title-left">
-                                <h3>Price</h3>
-                            </div>
-                            <div className="price-box-slider">
-                                <div id="slider-range"></div>
-                                <p>
-                                    <input type="text" id="amount"/>
-                                    <button className="btn hvr-hover" type="submit">Filter</button>
-                                </p>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -179,7 +207,7 @@ function HomeScreen(props) {
     </div>
 </div>
     
-    // </div>
+</div>
   );
 }
 export default HomeScreen;

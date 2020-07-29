@@ -27,6 +27,20 @@ function SigninScreen(props) {
     dispatch(signin(email, password));
   };
   return (
+    <div>
+    <div className="all-title-box">
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-12">
+                    <h2>SIGNIN</h2>
+                    <ul className="breadcrumb">
+                        <li className="breadcrumb-item"><a href="#">Home</a></li>
+                        <li className="breadcrumb-item active">Shop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <div  style={{'margin-top' : '20px'}} className="form">
       <form onSubmit={submitHandler}>
         <ul className="form-container">
@@ -78,6 +92,7 @@ function SigninScreen(props) {
         
         </ul>
       </form>
+    </div>
     </div>
   );
 }

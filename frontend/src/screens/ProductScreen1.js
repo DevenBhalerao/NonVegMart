@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { detailsProduct } from '../actions/productActions';
+import Cookie from 'js-cookie';
 import './css/style.css';
 // import MetaTags from 'react-meta-tags';
 function ProductScreen(props) {
@@ -9,7 +10,8 @@ function ProductScreen(props) {
   const productDetails = useSelector(state => state.productDetails);
   // console.log(productDetails);
   const { product, loading, error } = productDetails;
-  console.log(product)
+  console.log(product.slice(0 , 1))
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,10 +21,14 @@ function ProductScreen(props) {
     };
   }, []);
 
-  const handleAddToCart = () => {
-    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+  let cartItems = [];
+  const handleAddToCart = (productId) => {
+    // props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+    cartItems = product[0];
+    Cookie.set("cartItems" , cartItems)
   }
-
+  console.log(cartItems);
+  let value = 0;
   return(
   <div>
     <div classNameName="back-to-result">
@@ -72,7 +78,8 @@ function ProductScreen(props) {
 							      <li>
 								      <div className="form-group quantity-box">
 									      <label className="control-label">Quantity</label>
-								      	<input className="form-control" value="0" min="0" max="20" type="number"/>
+								      	<input className="form-control" value={value} type="text" pattern="[0-9]*"></input>
+                        {/* <select className="form-control"></select> */}
 								      </div>
 							      </li>
 						        </ul>
@@ -80,7 +87,7 @@ function ProductScreen(props) {
                     <div className="price-box-bar">
                       <div className="cart-and-bay-btn">
                       <a id="button1" className="btn hvr-hover" data-fancybox-close="" href="/shop">Buy New</a>
-                      <a id="button1" className="btn hvr-hover" data-fancybox-close="" href='javascript:void(0)' onClick={handleAddToCart}>Add to cart</a>
+                      <a id="button1" className="btn hvr-hover" data-fancybox-close="" href='javascript:void(0)' onClick={() => handleAddToCart(product._id)}>Add to cart</a>
                     </div>
 
 						      </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { logout, update } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
 import { useDispatch, useSelector } from 'react-redux';
+import './css/style.css';
 
 function ProfileScreen(props) {
   const [name, setName] = useState('');
@@ -26,6 +27,7 @@ function ProfileScreen(props) {
   const myOrderList = useSelector(state => state.myOrderList);
   const { loading: loadingOrders, orders, error: errorOrders } = myOrderList;
   useEffect(() => {
+    console.log(userInfo);
     if (userInfo) {
       console.log(userInfo.name)
       setEmail(userInfo.email);
@@ -39,49 +41,62 @@ function ProfileScreen(props) {
   }, [userInfo])
 
   return <div className="profile">
+    <div className="all-title-box">
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-12">
+                    <h2>PROFILE</h2>
+                    <ul className="breadcrumb">
+                        <li className="breadcrumb-item"><a href="#">Home</a></li>
+                        <li className="breadcrumb-item active">Shop</li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+        </div>
+        <br></br>
     <div className="profile-info">
       <div className="form">
         <form onSubmit={submitHandler} >
           <ul className="form-container">
-            <li>
-              <h2>User Profile</h2>
-            </li>
+          
             <li>
               {loading && <div>Loading...</div>}
               {error && <div>{error}</div>}
               {success && <div>Profile Saved Successfully.</div>}
             </li>
             <li>
-              <label htmlFor="name">
+              <label  className='mb-0' htmlFor="name">
                 Name
-          </label>
-              <input value={name} type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}>
-              </input>
+          </label><br></br>
+              <input className='form-control' value={name} type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}>
+              </input><br></br>
             </li>
             <li>
-              <label htmlFor="email">
+              <label  className='mb-0' htmlFor="email">
                 Email
-          </label>
-              <input value={email} type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>
-              </input>
+          </label><br></br>
+              <input className='form-control' value={email} type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>
+              </input><br></br>
             </li>
             <li>
-              <label htmlFor="password">Password</label>
-              <input value={password} type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}>
-              </input>
+              <label  className='mb-0' htmlFor="password">Password</label><br></br>
+              <input className='form-control' value={password} type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}>
+              </input><br></br>
             </li>
 
-            <li>
-              <button type="submit" className="button primary">Update</button>
-            </li>
-            <li>
-              <button type="button" onClick={handleLogout} className="button secondary full-width">Logout</button>
-            </li>
+          
+              <button type="submit"  style={{'color' : 'white'}} className="btn hvr-hover">Update</button>
+            
+            
+              <button type="button" style={{'backgroundColor' : 'red' , 'color' : 'white'}} onClick={handleLogout} className="btn hvr-hover logout-button btn btn-danger">Logout</button>
+             
 
           </ul>
         </form>
       </div>
     </div>
+    <br></br>
     <div className="profile-orders content-margined">
       {
         loadingOrders ? <div>Loading...</div> :

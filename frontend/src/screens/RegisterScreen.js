@@ -7,6 +7,8 @@ function RegisterScreen(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [seller , setSeller] = useState('');
+  console.log(seller);
   const [rePassword, setRePassword] = useState('');
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, userInfo, error } = userRegister;
@@ -26,9 +28,23 @@ function RegisterScreen(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    dispatch(register(name, email, password,seller));
   };
   return (
+    <div>
+    <div className="all-title-box">
+        <div className="container">
+            <div className="row">
+                <div className="col-lg-12">
+                    <h2>REGISTER</h2>
+                    <ul className="breadcrumb">
+                        <li className="breadcrumb-item"><a href="#">Home</a></li>
+                        <li className="breadcrumb-item active">Shop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <div style={{'margin-top' : '20px'}}className="form">
       <form onSubmit={submitHandler}>
         <ul className="form-container">
@@ -84,6 +100,10 @@ function RegisterScreen(props) {
               onChange={(e) => setRePassword(e.target.value)}
             ></input>
           </li>
+          <div>
+            <input type="checkbox" onChange={(e) => setSeller(e.target.value)}></input>
+            <label>Are you a seller?</label>
+          </div>
           <li><br></br>
           <button type="submit" className="btn hvr-hover">
               <b style={{'color' : 'white'}}> Register</b>
@@ -100,6 +120,7 @@ function RegisterScreen(props) {
           </li>
         </ul>
       </form>
+    </div>
     </div>
   );
 }

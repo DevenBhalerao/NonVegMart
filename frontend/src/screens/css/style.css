@@ -27,7 +27,7 @@
 
  body {
      color: #666666;
-     font-size: 15px;
+     font-size: 20px;
      font-family: 'Dosis', sans-serif;
      line-height: 1.80857;
 }
@@ -681,6 +681,9 @@
      
 }
 
+.logout-button{
+    margin-left:53%;
+}
  #button1{
      color:#fff;
  }
@@ -817,8 +820,10 @@
      padding: 10px 20px;
 }
 /*------------------------------------------------------------------ Categories Shop -------------------------------------------------------------------*/
- .categories-shop{
+
+.categories-shop{
      padding: 70px 0px;
+     
 }
  .shop-cat-box{
      margin-bottom: 30px;
@@ -883,6 +888,12 @@
 	-webkit-transform: translateY(6px);
 	transform: translateY(6px);
 	box-shadow: 0px 9px 15px 0px rgba(0, 0, 0, 0.1);
+}
+
+.Badge{
+    position: absolute;
+    top:2.5rem;
+    
 }
 
 /*------------------------------------------------------------------ Products -------------------------------------------------------------------*/
@@ -1057,6 +1068,26 @@
      55%, 75%, 87%, 97%, 100% {
          transform: translateY(0px);
     }
+}
+.fa-shopping-cart{
+    height:20px;
+    width:20px;
+}
+.categoryImage {
+    height:150px;
+    width:150px; 
+    border-radius:50%;
+    margin-left:40px;
+    border: 5px solid #2c3e50; 
+    /* box-shadow:  -40px 6px cadetblue; */
+}
+.categoryName{
+    margin-left:85px;
+}
+.fa-search{
+    height:100px;
+    margin-left: 3px;;
+    /* background-color:red */
 }
  @-moz-keyframes bounceY {
      0% {
@@ -2076,9 +2107,14 @@
      font-weight: 700;
      font-size: 18px;
      color: #000000;
+   
+    
 }
  .remove-pr{
      text-align: center;
+     height:100%;
+     width: 20px;
+     /* background-color: red; */
 }
  .coupon-box .input-group .form-control {
      min-height: 50px;

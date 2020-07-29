@@ -78,7 +78,8 @@ function CartScreen(props) {
                                     </td>
                                     <td>
                                     <div class="quantity">
-                                      <select
+                                      <select className="form-control"
+                                        style={{width:'70px'}}
                                         value={item.qty}
                                         onChange={(e) =>
                                           dispatch(
@@ -100,13 +101,10 @@ function CartScreen(props) {
                                     &#8377;{item.price * item.qty}
                                     </td>
                                     
-                                    <td class="remove-pr">
-                                        <a href="javascript:void(0)" onClick={() =>
-                                removeFromCartHandler(item.product)
-                              }>
-									                      <i class="fa fa-times"></i>
-								                        </a>
-                                    </td>
+                                    <td className="remove-pr">
+                                      <center><i onClick={() => removeFromCartHandler(item.product)} className="fa fa-times"></i></center>
+								                    </td>
+                                    
                                 </tr>
                               ))
                              )}

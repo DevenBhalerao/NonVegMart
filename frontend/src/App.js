@@ -9,6 +9,7 @@ import SigninScreen from './screens/SigninScreen';
 import { useSelector } from 'react-redux';
 import RegisterScreen from './screens/RegisterScreen';
 import UploadProductsScreen from './screens/UploadProductScreen';
+import SellerProductsScreen from './screens/UploadSellerProductScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
@@ -23,6 +24,7 @@ import LandingScreen from './screens/LandingSreen'
 import aboutUs from './about-us'
 import privacyPolicy from './PrivacyPolicy'
 import refund from './refundandreturn'
+
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -63,9 +65,10 @@ function App() {
             <Route path="/about-us" component={aboutUs}/>
             <Route path="/privacy-policy" component={privacyPolicy}/>
             <Route path='/refund-return' component={refund}/>
+            <Route path='/sellerproducts' component={SellerProductsScreen}/>
           </div>
         </main>
-        <footer className="footer">All right reserved.</footer>
+        
       </div>
       <Footer />
     </BrowserRouter>

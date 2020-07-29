@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  saveProduct,
-  listProducts,
-  deleteProdcut,
-} from '../actions/productActions';
+// import {Modal, Button } from 'reactstrap';
+import { sellersaveProduct, sellerlistProducts, sellerdeleteProdcut } from '../actions/sellerProductActions';
 import {
   saveCategory,
   listCategory,
   deleteCategory,
 } from '../actions/categoryActions';
-import FileUpload from '../components/utils/FileUploads';
+// import CharacterDropDown from '../components/utils/CharacterDropDown';
+import FileUpload from '../components/FileUploads';
 
-function ProductsScreen(props) {
+function SellerProductsScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
+  const [sellerid, setSellerId] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
@@ -23,25 +22,19 @@ function ProductsScreen(props) {
   const [categoryId, setCategoryId] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
-  const productList = useSelector((state) => state.productList);
-  const { loading, products, error } = productList;
-
-  const productSave = useSelector((state) => state.productSave);
-  const {
-    loading: loadingSave,
-    success: successSave,
-    error: errorSave,
-  } = productSave;
+  const sellerProductList = useSelector(state => state.sellerProductList);
+  console.log(sellerProductList);
+  const { loading, products, error } = sellerProductList;
+  // console.log(products);
   const categoryList = useSelector((state) => state.categoryList);
 
   const { category } = categoryList;
-  const productDelete = useSelector((state) => state.productDelete);
-  const {
-    loading: loadingDelete,
-    success: successDelete,
-    error: errorDelete,
-  } = productDelete;
 
+  const sellerProductSave = useSelector(state => state.sellerProductSave);
+  const { loading: loadingSave, success: successSave, error: errorSave } = sellerProductSave;
+
+  const sellerProductDelete = useSelector(state => state.sellerProductDelete);
+  const { loading: loadingDelete, success: successDelete, error: errorDelete } = sellerProductDelete;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,60 +42,63 @@ function ProductsScreen(props) {
       setModalVisible(false);
     }
     dispatch(listCategory());
-    dispatch(listProducts());
+    dispatch(sellerlistProducts());
     return () => {
       //
     };
   }, [successSave, successDelete]);
-
   const openModal = (product) => {
     setModalVisible(true);
     setId(product._id);
     setName(product.name);
     setPrice(product.price);
     setDescription(product.description);
-    setImages(product.image);
     setBrand(product.brand);
     setCountInStock(product.countInStock);
   };
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveProduct({
+      sellersaveProduct({
         _id: id,
         name,
         price,
-        image: Images,
         brand,
+        countInStock,
         category: categoryName,
         categoryId: categoryId,
-        countInStock,
         description,
+        image: Images,
       })
     );
   };
-  const deleteHandler = (product) => {
-    dispatch(deleteProdcut(product._id));
+  const deleteHandler = (sellerproduct) => {
+    dispatch(sellerdeleteProdcut(sellerproduct._id));
   };
 
   const updateImages = (newImages) => {
     setImages(newImages);
+    console.log(newImages);
   };
+
 
   const dropdown = (categoryId) => {
     const strValue = categoryId.value.split('_');
     const categoryId_temp = strValue[0];
     const categoryName_temp = strValue[1];
+    //console.log(categoryId_temp)
+    //console.log(categoryName_temp)
     setCategoryId(categoryId_temp);
     setCategoryName(categoryName_temp);
   };
-  return (
-    <div className="content content-margined">
-      <div className="all-title-box">
+  // console.log(modalVisible)
+ 
+  return <div className="content content-margined">
+    <div className="all-title-box">
         <div className="container">
             <div className="row">
                 <div className="col-lg-12">
-                    <h2>PRODUCTS</h2>
+                    <h2>SELLER-PRODUCTS</h2>
                     <button style={{'color' : 'white' , "marginLeft" : '400px'}}onClick={openModal} className="btn hvr-hover">Create Product</button>
                     
                 </div>
@@ -110,6 +106,17 @@ function ProductsScreen(props) {
         </div>
     </div>
     <div className="product-header" style={{ 'margin-bottom': '7%' }}>
+      
+      {/* <button
+        className="btn-primary"
+        style={{ float: 'right', 'margin-right': '20%' }}
+        onClick={openModal}
+      >
+        Create Product
+        </button> */}
+   
+    {/* {console.log(modalVisible)}  */}
+   
       {  modalVisible && (
       <div  style={{'margin-top' : '20px'}} className="form">
         <form onSubmit={submitHandler} >
@@ -197,44 +204,46 @@ function ProductsScreen(props) {
         </form>
       </div>
       )}
-      </div>
-      <div className="product-list">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Stock</th>
-              <th>Brand</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products &&
-              products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td >
+    </div>
+    <div className="product-list">
+
+      <table className="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>SELLERID</th>
+           
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Stock</th>
+            <th>Brand</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products && products.map((product) => (<tr key={product._id}>
+            <td>{product._id}</td>
+            <td >
                     <img class="img-fluid" style={{width: '120px'}}src = {`http://localhost:5000/${product.image}`} alt="" />
                   </td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.countInStock}</td>
-                  <td>{product.brand}</td>
-                  <td>
-                  <button  style={{'color' : "white"}} className="btn hvr-hover" onClick={() => openModal(product)} >Edit</button>
-                  <button  style={{backgroundColor : 'red' , 'color':'white'}}className="btn hvr-hover m-2" onClick={() => deleteHandler(product)} >Delete</button>                   
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+            <td>{product.sellerid}</td>
+            
+            <td>{product.name}</td>
+            <td>{product.price}</td>
+            <td>{product.category}</td>
+            <td>{product.countInStock}</td>
+            <td>{product.brand}</td>
+            <td>
+              <button  style={{'color' : "white"}} className="btn hvr-hover" onClick={() => openModal(product)} >Edit</button>
+              <button  style={{backgroundColor : 'red' , 'color':'white'}}className="btn hvr-hover m-2" onClick={() => deleteHandler(product)} >Delete</button>
+            </td>
+          </tr>))}
+        </tbody>
+      </table>
+
     </div>
-  );
+  </div>
 }
-export default ProductsScreen;
+export default SellerProductsScreen;

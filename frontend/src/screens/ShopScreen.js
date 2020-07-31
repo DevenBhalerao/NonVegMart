@@ -148,7 +148,7 @@ function HomeScreen(props) {
                                 onClick={()=> paginate(number)} href="javascript:void(0)"> {number}</a></span>
                                 ))}
                             
-                                <a><i class="fa fa-long-arrow-right"></i></a>
+                                <a><i class="fa fa-long-arrow-right m-2"></i></a>
                                 
                             </div></center>
                             </div>

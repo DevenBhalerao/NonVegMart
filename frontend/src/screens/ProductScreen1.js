@@ -10,7 +10,8 @@ function ProductScreen(props) {
   const productDetails = useSelector(state => state.productDetails);
   // console.log(productDetails);
   const { product, loading, error } = productDetails;
-  console.log(product.slice(0 , 1))
+ 
+  // console.log(product.slice(0 , 1))
 
   const dispatch = useDispatch();
 
@@ -23,9 +24,9 @@ function ProductScreen(props) {
 
   let cartItems = [];
   const handleAddToCart = (productId) => {
-    // props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
-    cartItems = product[0];
-    Cookie.set("cartItems" , cartItems)
+    props.history.push("/cart/" + props.match.params.id + "?qty=" + qty)
+    // cartItems = product.find((x) => x._id === productId);
+    // Cookie.set("cartItems" , cartItems)
   }
   console.log(cartItems);
   let value = 0;

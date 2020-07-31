@@ -75,13 +75,13 @@ function SigninScreen(props) {
             ></input><br></br>
           </li>
           <li>
-            <button type="submit" className="btn hvr-hover">
+            <button style={{width:'100%'}} type="submit" className="btn hvr-hover">
               <b style={{'color' : 'white'}}> Signin</b>
             </button>
-          </li><br></br>
-            Haven't registered yet?
+          </li>
+           <small> <span>Haven't registered yet?</span>
          
-            <Link style={{'margin-left':'55px' }}
+            <Link style={{marginLeft : '5px'}}
               to={
                 redirect === '/' ? 'register' : 'register?redirect=' + redirect
               }
@@ -89,6 +89,7 @@ function SigninScreen(props) {
             >
               <span style={{'color' : 'blue' , 'border-bottom':'1px blue solid'}}>Create your account</span>
             </Link>
+            </small>
         
         </ul>
       </form>

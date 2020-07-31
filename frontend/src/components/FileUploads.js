@@ -39,7 +39,7 @@ function FileUpload(props) {
     setImages(newImages);
     props.refreshFunction(newImages);
   };
-
+  let plus = 'fa fa-plus  fa-4x ';
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <Dropzone onDrop={onDrop} multiple={false} maxSize={800000000}>
@@ -49,38 +49,41 @@ function FileUpload(props) {
               width: '300px',
               height: '240px',
               border: '1px solid lightgray',
-              display: 'flex',
+              display:'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'center'
             }}
             {...getRootProps()}
-            {...<i classsName="fa fa-plus"></i>}
-          >
             
+          >
+            <a><i style={{color:'#b0b435' , fontSize:'150px'}} className={plus} aria-hidden = 'true'></i></a>
             <input {...getInputProps()} />
+           
            
           </div>
         )}
       </Dropzone>
-
+      
       <div
         style={{
           display: 'block',
           height: '240px',
-          // overflowX: 'scroll',
+          
         }}
       >
+        
         {Images.map((image, index) => (
           <div>
           
           <div onClick={() => onDelete(image)}>
             <img
-              style={{ minWidth: '300px', width: '300px', height: '240px' }}
+              style={{ minWidth: '300px', width: '100%', height: '240px' }}
               src={`http://localhost:5000/${image}`}
               alt={`productImg-${index}`}
             />
           </div>
-          <div><button onClick={() => onDelete(image)}> Change Image</button></div>
+          {plus = ""}
+          <div><button className="btn btn-primary m-20 p-2" onClick={() => onDelete(image)}> Change Image</button></div>
           </div>
         ))}
       </div>

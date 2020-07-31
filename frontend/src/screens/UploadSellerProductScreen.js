@@ -22,6 +22,8 @@ function SellerProductsScreen(props) {
   const [categoryId, setCategoryId] = useState('');
   const [countInStock, setCountInStock] = useState('');
   const [description, setDescription] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(5);
   const sellerProductList = useSelector(state => state.sellerProductList);
   console.log(sellerProductList);
   const { loading, products, error } = sellerProductList;
@@ -81,7 +83,19 @@ function SellerProductsScreen(props) {
     console.log(newImages);
   };
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(indexOfFirstProduct , indexOfLastProduct);
 
+  const pageNumbers = [];
+  const totalProducts = products.length;
+
+  const paginate = (pageNumber)=>{
+    setCurrentPage(pageNumber);
+  }
+  for(let i=1;i <= Math.ceil(totalProducts / productsPerPage) ; i++){
+    pageNumbers.push(i);
+  }
   const dropdown = (categoryId) => {
     const strValue = categoryId.value.split('_');
     const categoryId_temp = strValue[0];
@@ -223,7 +237,7 @@ function SellerProductsScreen(props) {
           </tr>
         </thead>
         <tbody>
-          {products && products.map((product) => (<tr key={product._id}>
+          {currentProducts && currentProducts.map((product) => (<tr key={product._id}>
             <td>{product._id}</td>
             <td >
                     <img class="img-fluid" style={{width: '120px'}}src = {`http://localhost:5000/${product.image}`} alt="" />
@@ -240,7 +254,19 @@ function SellerProductsScreen(props) {
               <button  style={{backgroundColor : 'red' , 'color':'white'}}className="btn hvr-hover m-2" onClick={() => deleteHandler(product)} >Delete</button>
             </td>
           </tr>))}
+          
+          <div class="product__pagination">
+                            {pageNumbers.map(number => (
+                                <span style={{ marginLeft:'10px'}}><a className='product_pagination'
+                                onClick={()=> paginate(number)} href="javascript:void(0)"> {number}</a></span>
+                                ))}
+                            
+                                <a><i class="fa fa-long-arrow-right"></i></a>
+                                
+                            </div>
+                        
         </tbody>
+        
       </table>
 
     </div>

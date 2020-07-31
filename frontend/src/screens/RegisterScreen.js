@@ -104,19 +104,19 @@ function RegisterScreen(props) {
             <input type="checkbox" onChange={(e) => setSeller(e.target.value)}></input>
             <label>Are you a seller?</label>
           </div>
-          <li><br></br>
-          <button type="submit" className="btn hvr-hover">
-              <b style={{'color' : 'white'}}> Register</b>
-            </button>
-          </li><br></br>
           <li>
-            Already have an account?
-            <Link style={{'margin-left':'100px'}}
+          <button style={{width:'100%'}}type="submit" className="btn hvr-hover">
+              <b style={{'color' : 'white' }}> Register</b>
+            </button>
+          </li>
+          <li>
+           <small><span> Already have an account?</span>
+            <Link style={{'margin-left':'10px'}}
               to={redirect === '/' ? 'signin' : 'signin?redirect=' + redirect}
               className="button secondary text-center"
             >
               <span id="signin-link" style={{'color' : 'blue' , 'border-bottom':'1px blue solid'}}>Sign-in</span>
-            </Link>
+            </Link></small>
           </li>
         </ul>
       </form>
